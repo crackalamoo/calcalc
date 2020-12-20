@@ -15,7 +15,6 @@
 <meta name="description" content="Calendar Converter" />
 <meta name="author" content="John Walker and Harys Dalvi" />
 <meta name="robots" content="index" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script type="text/javascript" language="JavaScript" src="lang1.js"></script>
 <script type="text/javascript" language="JavaScript" src="lang2.js"></script>
@@ -34,7 +33,6 @@
 <body class="">
 
 <h1>Calendar Converter</h1>
-<h2>Fourmilab</h2>
 
 <hr />
 
@@ -55,10 +53,6 @@
 document.warning.warning.value = "Your browser supports JavaScript" +
 	" — you can use this calculator.";
 document.warning.warning.style.backgroundColor = "#A0FFA0";
-var backButton = document.getElementById("backButton");
-var lang = getLang()[1];
-backButton.innerHTML = BACK[lang];
-setAnchorProperties(backButton);
 </script>
 
 <br><br>
@@ -622,7 +616,7 @@ braking of the rotation of the Earth.
 </table>
 </form>
 
-<p lang="ur">
+<p lang="ur" style="font-size: 18px;">
 اسلامی تقویم چاند سے جڑا ہے۔ بارہ مہینے ہیں، اور ہر ایک
 میں یا تو ۳۰ یا ۲۹ دن ہوتے ہیں۔ آخری مہینے، ذو الحجہ، میں
 دونوں ۲۹ اور ۳۰ دن ہو سکتے ہیں۔ ہر ۳۰ سالوں میں ذو الحجہ
@@ -632,7 +626,7 @@ braking of the rotation of the Earth.
 یہ پہلا نیا چاند ہے محمد  کے مکہ سے مدینے جانے
 کے بعد۔
 </p>
-<div lang="ur" id="islamicInfo">
+<div lang="ur" id="islamicInfo" style="font-size: 18px">
 <p>
   عیسوی تقویم میں، دن آدھی رات کو شروع ہوتے ہیں۔
   اسلامی تقویم میں، سورج کے اترنے سے شروع ہوتے ہیں۔
@@ -817,7 +811,7 @@ the crescent of the new Moon.
 <p lang="hi">
 हिंदू पंचांग दोनों चांद और सूरज से जुड़ा है। कई हिंदू पंचांगों में महीना पूनम
 में शुरू होता है। इस पंचांग में महीना दोनों अमावस और पूनम पे शुरू हो सकता है। जो महीना शुरू होता
-है, ये साल में बदलता रहता राशियों के साथ। तारे एक साल में पूरा गोल करते, और
+है, ये साल में बदलता रहता रासों के साथ। तारे एक साल में पूरा गोल करते, और
 इसलिए हिंदू पंचांग भी एक साल में गोल करता है। दोनों तारों और चांद के साथ जाने
 की वजह से, कभी एक महीना दो बार साल में होता है। जब ये होता है, पहला महीना
 &ldquo;अधिक&rdquo; होता है और दूसरा &ldquo;शुद्ध&rdquo;। भारत, पाकिस्तान,
@@ -828,7 +822,8 @@ the crescent of the new Moon.
 यहाँ के बक्सों के तारीख़ों को &ldquo;तिथी&rdquo; कहते है। ये चांद का दिन है। चांद के एक गोल में ३० तिथियाँ हैं, मगर ये हमारे दिनों से
 जुदा है: आधी रात को या किसी एक घंटे को नहीं शुरू होते हैं। इसलिए नीचे लिखा है उस दिन का नाम जो था जब सूरज
 पछली बार उग गया, और ऊपर चांद की तिथी लिखी है। एक तिथी हमारे दिन से थोड़ी छोटी है क्योंकि चांद के एक गोल में
-तक़रीबन 29.5 दिन हैं, मगर 30 तिथियाँ हैं। अगर न पूनम न अमावस है, कहना है कि क्या चांद छोटा (कृष्ण/अंधेरा) या बड़ा (शुक्ल/उजाला) हो रहा है।
+तक़रीबन 29.5 दिन हैं, मगर 30 तिथियाँ हैं। महीने में दो पक्ष या पाख होते हैं। अगर न पूनम न अमावस है, पाख का नाम
+कहना है ताकि पता हो कि क्या चांद उतर रहा है (कृष्ण पक्ष/अंधेरा पाख) या बढ़ रहा है (शुक्ल पक्ष/उजाला पाख)।
 जैसे, अगर अमावस से तीन दिन बाद है, दिन का नाम &ldquo;उजाली तीज&rdquo; है। अगर पूनम से तीन दिन बाद है,
 दिन का नाम &ldquo;अंधेरी तीज&rdquo; है। ज़्यादातर तिथी का इस्तेमाल नहीं होता है, मगर &ldquo;दिवस&rdquo; का।
 दिवस सूरज के आने पे शुरू होते हैं।
@@ -903,10 +898,10 @@ the crescent of the new Moon.
 तक़रीबन 0.014° पीछे हो जाते हैं। जितने पीछे हुए हैं दुनिया और सूरज से,
 हम उसको &ldquo;अयनांश&rdquo; कहते हैं।
 25771.5 सालों बाद, अयनांश पूरा 360° चला होगा! इसलिए रुतों के
-साथ चलने के लिए ज़रूरी है कि महीनों की राशियाँ बदलें लगभग हर 2147.62
+साथ चलने के लिए ज़रूरी है कि महीनों की रासें बदलें लगभग हर 2147.62
 साल। मगर सूर्यसिद्धान्थ में कहा है कि अयनांश 27° और -27° के बीच
 हमेशा रहता है गोल मारके। इधर सूर्यसिद्धान्थ के हिसाब का इस्तेमाल होता है
-रुतों और महीनों के लिए। राशियां सूर्यसिद्धान्थ के हिसाब से नहीं आती हैं।
+रुतों और महीनों के लिए। रासें सूर्यसिद्धान्थ के हिसाब के अयनांश से नहीं गिनी जाती हैं।
 </p>
 <p>
 साल का पहला महीना ज़्यादातर चैत है, मगर बंगाली पंचांग में बैसाख है।
@@ -1007,9 +1002,10 @@ the moon there are 30 tithis, but this is separate from our days: they don't
 start at midnight or any one specific time. For this reason, the name of the day
 it was at sunrise is written below, and the tithi of the moon is written
 above. A tithi is slightly shorter than one of our days because one cycle of the
-moon is about 29.5 days, but 30 tithis. If it is neither <i>Amavasya</i> nor
-<i>Poornima</i>, it must be specified whether the moon is waxing (<i>Shukla</i>)
-or waning (<i>Krishna</i>). For example, if it is three days after Amavasya,
+moon is about 29.5 days, but 30 tithis.
+There are two <i>paksha</i>s (fortnights) in a month. If it is neither <i>amavasya</i> nor
+<i>poornima</i>, the name of the fortnight must be specified to know whether the moon is waxing (<i>shukla paksha</i>)
+or waning (<i>krishna paksha</i>). For example, if it is three days after Amavasya,
 the day is called <i>Shukla Tritiya</i>. If it is three days after Poornima,
 the day is called <i>Krishna Tritiya</i>. Generally tithi is not used, but <i>divasa</i>.
 A divasa begins with sunrise.
@@ -1021,7 +1017,7 @@ to stay with the seasons it is necessary that the months' zodiac signs change ab
 every 2147.62 years. However, the <cite>Surya Siddhantha</cite> says that ayanamsa cycles
 between 27° and -27°. The <cite>Surya Siddhantha</cite> values are used here
 for calculating seasons and months. The zodiac signs are not calculated from the
-<cite>Surya Siddhantha</cite>.
+<cite>Surya Siddhantha</cite> ayanamsa values.
 </p>
 <p>
 The first month of the year is usually Chaitra, but in the Bengali calendar it is
@@ -1231,8 +1227,8 @@ seem to apply.
   marking the <i>Hijra</i> (flight) from Mecca to Medina. The Kurdish calendar
   is also a version of the Persian calendar, but beginning earlier, in 612
   <span class="bcad">B.C.E</span>. This year is relevant to Kurdish history
-  because of its importance in the life of the Median king Cyaxares (in Kurdish: <i>Hevexştre</i>).
-  King Phraortes (in Kurdish: <i>Frevertîş</i>),
+  because of its importance in the life of the Median king Cyaxares (<i lang="ku">Hevexştre</i>).
+  King Phraortes (<i lang="ku">Frevertîş</i>),
   the father of Cyaxares, was killed in battle by Assyrians. Media was then
   conquered by Scythians. Cyaxares overthrew the Scythians and began to fight against
   Assyria. In 612 <span class="bcad">B.C.E.</span>, Cyaxares took the Assyrian capital of
