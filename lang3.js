@@ -20,7 +20,7 @@ function lang3_hi() {
   lang3Data.moon = "चाँद";
   lang3Data.dayNames = ["अमावस", "परिवा", "दूज", "तीज", "चौथ", "पंचमी",
     "छठ", "सप्तमी", "अष्टमी", "नौमी", "दसमी", "ग्यारस", "बारस", "तेरस", "चौदस", "पूनम"];
-  lang3Data.dayTypes = ["उजाली", "अंधेरी"];
+  lang3Data.dayTypes = ["शुक्ल", "कृष्ण"];
   lang3Data.yearTypes = new Array("आम साल", "लंबा साल");
   lang3Data.dir = "ltr";
   lang3Data.zodiacSign = "रास";
@@ -74,8 +74,8 @@ function lang3_ur() {
   lang3Data.moon = "چاند";
   lang3Data.dayNames = ["اماوس", "پروا", "دوج", "تیج", "چوتھ", "پنچمی",
     "چھٹ", "سپتمی", "اشٹمی", "نومی", "دسمی", "گیارس", "بارس", "تیرس", "چودس", "پونم"];
-  lang3Data.dayTypes = ["اُجالی",
-                        "اندھیری"];
+  lang3Data.dayTypes = ["شُکل",
+                        "کرِشن"];
   lang3Data.yearTypes = new Array("عام سال", "لمبا سال");
   lang3Data.dir = "rtl";
   lang3Data.zodiacSign = "راس";
