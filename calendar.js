@@ -314,7 +314,7 @@ function saveJulian(update=false) {
   if (update)
     savedJulianDay = document.julianday.day.value;
   if (!isNaN(savedJulianDay))
-    document.getElementById("savedDay").innerHTML = "Days relative to saved day: " +
+    document.getElementById("savedDay").innerHTML = "Days relative to pinned day: " +
       (Math.round((document.julianday.day.value - savedJulianDay)*100)/100)
 }
 
