@@ -79,9 +79,9 @@ function lang5_fr() {
     "adar alef",
     "adar bet"
   );
-  lang5Data.yearTypes = ["Commune déficiente (353 days)", "Commune régulière (354 days)",
-    "Commune abondante (355 days)", "Embolismique déficiente (383 days)", "Embolismique régulière (384 days)",
-    "Embolismique abondante (385 days)"];
+  lang5Data.yearTypes = ["Commune déficiente (353 jours)", "Commune régulière (354 jours)",
+    "Commune abondante (355 jours)", "Embolismique déficiente (383 jours)", "Embolismique régulière (384 jours)",
+    "Embolismique abondante (385 jours)"];
   lang5Data.start = "Début";
   lang5Data.yearMark = " AM";
   lang5Data.numberMap = null;
