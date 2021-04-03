@@ -232,7 +232,7 @@ function lang3_mr() {
   lang3Data.language= "भारतीय दिनदर्शिके";
   lang3Data.hindu = "हिंदू दिनदर्शिका";
   lang3Data.indian = "भारतीय राष्ट्रीय दिनदर्शिका";
-  lang3Data.date = "तिथी";
+  lang3Data.date = "तारीख";
   lang3Data.weekday = "आठवड्याचा दिवस";
   lang3Data.weekdays = new Array(
       "रविवार", "सोमवार", "मंगळवार", "बुधवार",
