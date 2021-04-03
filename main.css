@@ -7,7 +7,13 @@ body {
 
 @font-face {
   font-family: DevanagariFont;
-  src: url('fonts/itfdevanagari.ttc');
+  font-weight: normal;
+  src: url('fonts/ITFDevanagari-Regular-01.ttf') format("truetype");
+}
+@font-face {
+  font-family: DevanagariFont;
+  font-weight: bold;
+  src: url('fonts/ITFDevanagari-Bold-02.ttf') format("truetype");
 }
 @font-face {
   font-family: Naskh;
@@ -194,6 +200,9 @@ div#calendarBox {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+button#jumpPinButton {
+  display: none;
 }
 div.calendarHeading {
   text-align: center;
