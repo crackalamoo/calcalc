@@ -258,6 +258,8 @@ function changeLanguage3(l=null, start=false) {
   document.getElementById("ayanamsha").style.fontFamily = lang3Data.font;
   document.getElementById("ritu").innerHTML = lang3Data.ritu;
   document.getElementById("ritu").style.fontFamily = lang3Data.font;
+  document.getElementById("prahar").innerHTML = lang3Data.prahar;
+  document.getElementById("prahar").style.fontFamily = lang3Data.font;
   document.hinducalendar.style.direction = lang3Data.dir;
   document.indiancivilcalendar.style.direction = lang3Data.dir;
   try {

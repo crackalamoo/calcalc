@@ -33,6 +33,9 @@ function lang3_hi() {
   lang3Data.numberMap = "hi";
   lang3Data.seasons = ["बसंत", "गर्मी", "बरसात", "पतझड़", "हेमंत", "सर्दी"];
   lang3Data.ritu = "रुत";
+  lang3Data.prahar = "पहर";
+  lang3Data.prahars = ["दिन का पहला पहर", "दिन का दूसरा पहर", "दिन का तीसरा पहर", "दिन का चौथा पहर",
+    "रात का पहला पहर", "रात का दूसरा पहर", "रात का तीसरा पहर", "रात का चौथा पहर"];
 }
 
 function lang3_ur() {
@@ -88,6 +91,9 @@ function lang3_ur() {
   lang3Data.numberMap = "ur";
   lang3Data.seasons = ["بسنت", "گرمی", "برسات", "پتجھڑ", "ہیمنت", "سردی"];
   lang3Data.ritu = "رُت";
+  lang3Data.prahar = "پہر";
+  lang3Data.prahars = ["دن کا پہلا پہر", "دن کا دوسرا پہر", "دن کا تیسرا پہر", "دن کا چوتھا پہر",
+    "رات کا پہلا پہر", "رات کا دوسرا پہر", "رات کا تیسرا پہر", "رات کا چوتھا پہر"];
 }
 
 function lang3_pa_pk() {
@@ -142,6 +148,9 @@ function lang3_pa_pk() {
   lang3Data.numberMap = "ur";
   lang3Data.seasons = ["بسنت", "گرمی", "برسات", "پتجھڑ", "ہیمنت", "سردی"];
   lang3Data.ritu = "رُت";
+  lang3Data.prahar = "پہر";
+  lang3Data.prahars = ["دن دا پہلا پہر", "دن دا دوجا پہر", "دن دا تیجا پہر", "دن دا چوتھا پہر",
+    "رات دا پہلا پہر", "رات دا دوجا پہر", "رات دا تیجا پہر", "رات دا چوتھا پہر"];
 }
 function lang3_pa_in() {
   lang3Data.language= "ਭਾਰਤੀ ਕੈਲੰਡਰ";
@@ -175,7 +184,9 @@ function lang3_pa_in() {
   lang3Data.ayanamsha = "ਅਯਨਾਂਸ਼";
   lang3Data.numberMap = null;
   lang3Data.seasons = ["ਬਸੰਤ", "ਗਰਮੀ", "ਬਰਸਾਤ", "ਪੱਤਝੜ", "ਹੇਮੰਤ", "ਸਰਦੀ"];
-  lang3Data.ritu = "ਰੁੱਤ";
+  lang3Data.ritu = "ਪਹਿਰ";
+  lang3Data.prahars = ["ਦਿਨ ਦਾ ਪਹਿਲਾ ਪਹਿਰ", "ਦਿਨ ਦਾ ਦੂਜਾ ਪਹਿਰ", "ਦਿਨ ਦਾ ਤੀਜਾ ਪਹਿਰ", "ਦਿਨ ਦਾ ਚੌਥਾ ਪਹਿਰ",
+    "ਰਾਤ ਦਾ ਪਹਿਲਾ ਪਹਿਰ", "ਰਾਤ ਦਾ ਦੂਜਾ ਪਹਿਰ", "ਰਾਤ ਦਾ ਤੀਜਾ ਪਹਿਰ", "ਰਾਤ ਦਾ ਚੌਥਾ ਪਹਿਰ"];
 }
 
 function lang3_sa() {
@@ -211,6 +222,10 @@ function lang3_sa() {
   lang3Data.numberMap = "hi";
   lang3Data.seasons = ["वसन्तः", "ग्रीष्मः", "वर्षा", "शरद्", "हेमन्तः", "शिशिरः"];
   lang3Data.ritu = "ऋतु";
+  lang3Data.prahar = "प्रहर";
+  lang3Data.prahars = ["दिवसस्य प्रथमः प्रहरः", "दिवसस्य द्वितीयः प्रहरः", "दिवसस्य त्रितीयः प्रहरः", "दिवसस्य चतुर्थः प्रहरः",
+    "रात्रेः प्रथमः प्रहरः", "रात्रेः द्वितीयः प्रहरः", "रात्रेः त्रितीयः प्रहरः", "रात्रेः चतुर्थः प्रहरः"];
+
 }
 
 function lang3_mr() {
@@ -246,6 +261,9 @@ function lang3_mr() {
   lang3Data.numberMap = "hi";
   lang3Data.seasons = ["वसंत", "ग्रीष्म", "वर्षा", "शरद", "हेमंत", "शिशिर"];
   lang3Data.ritu = "ऋतू";
+  lang3Data.prahar = "प्रहर";
+  lang3Data.prahars = ["दिवसाचा पहिला प्रहर", "दिवसाचा दुसरा प्रहर", "दिवसाचा तिसरा प्रहर", "दिवसाचा चौथा प्रहर",
+    "रात्रीचा पहिला प्रहर", "रात्रीचा दुसरा प्रहर", "रात्रीचा तिसरा प्रहर", "रात्रेः चौथा प्रहर"];
 }
 
 function lang3_ta() {
@@ -281,6 +299,9 @@ function lang3_ta() {
   lang3Data.numberMap = null;
   lang3Data.seasons = ["இளவேனில்", "முதுவேனில்", "கார்", "குளிர்", "முன்பனி", "பின்பனி"];
   lang3Data.ritu = "பருவ காலம்";
+  lang3Data.prahar = "யாமம்";
+  lang3Data.prahars = ["நாள் முதல் யாமம்", "நாள் இரண்டாவது யாமம்", "நாள் மூன்றாவது யாமம்", "நாள் நான்காவது யாமம்",
+    "இரவின் முதல் யாமம்", "இரவின் இரண்டாவது யாமம்", "இரவின் மூன்றாவது யாமம்", "இரவின் நான்காவது யாமம்"];
 }
 
 function lang3_bn() {
@@ -316,6 +337,9 @@ function lang3_bn() {
   lang3Data.numberMap = null;
   lang3Data.seasons = ["বসন্ত", "গ্রীষ্ম", "বর্ষা", "শরৎ", "হেমন্ত", "শীত"];
   lang3Data.ritu = "ঋতু";
+  lang3Data.prahar = "প্রহর";
+  lang3Data.prahars = ["দিনের প্রথম প্রহর", "দিনের দ্বিতীয় প্রহর", "দিনের তৃতীয় প্রহর", "দিনের চতুর্থ প্রহর",
+    "রাতের প্রথম প্রহর", "রাতের দ্বিতীয় প্রহর", "রাতের তৃতীয় প্রহর", "রাতের চতুর্থ প্রহর"];
 }
 
 function lang3_en() {
@@ -354,6 +378,11 @@ function lang3_en() {
   lang3Data.seasons = ["Vasant (Spring)", "Grishma (Summer)", "Varsha (Monsoon)", "Sharad (Autumn)",
     "Hemant (Pre-Winter)", "Sishir (Winter)"];
   lang3Data.ritu = "Season";
+  lang3Data.prahar = "Prahara";
+  lang3Data.prahars = ["First prahara of the day", "Second prahara of the day",
+    "Third prahara of the day", "Fourth prahara of the day",
+    "First prahara of the night", "Second prahara of the night",
+    "Third prahara of the night", "Fourth prahara of the night"];
 }
 
 function lang3_gu() {
@@ -389,6 +418,9 @@ function lang3_gu() {
   lang3Data.numberMap = null;
   lang3Data.seasons = ["વસંત", "ઉનાળો", "વરસાદ", "પાનખર", "હેમંત", "શિયાળો"];
   lang3Data.ritu = "ઋતુ";
+  lang3Data.prahar = "પહોર";
+  lang3Data.prahars = ["દિવસનો પહેલો પહોર", "દિવસનો બીજો પહોર", "દિવસનો ત્રીજો પહોર", "દિવસનો ચોથો પહોર",
+    "રાતનો પહેલો પહોર", "રાતનો બીજો પહોર", "રાતનો ત્રીજો પહોર", "રાતનો ચોથો પહોર"];
 }
 
 function hinduDayName(day, poonam) {

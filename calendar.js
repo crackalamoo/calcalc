@@ -313,9 +313,17 @@ var savedJulianDay = NaN;
 function saveJulian(update=false) {
   if (update)
     savedJulianDay = document.julianday.day.value;
-  if (!isNaN(savedJulianDay))
+  if (!isNaN(savedJulianDay)) {
     document.getElementById("savedDay").innerHTML = "Days relative to pinned day: " +
-      (Math.round((document.julianday.day.value - savedJulianDay)*100)/100)
+      (Math.round((document.julianday.day.value - savedJulianDay)*100)/100);
+    document.getElementById("jumpPinButton").style.display = "inline-block";
+  }
+}
+function goToPin() {
+  if (!isNaN(savedJulianDay)) {
+    document.julianday.day.value = savedJulianDay;
+    calcJulian();
+  }
 }
 
 /*  WEEKDAY_BEFORE  --  Return Julian date of given weekday (0 = Sunday)
@@ -994,6 +1002,28 @@ function jd_to_hindu(jd, forceChaitra=false) {
   }
   FORCE_INDIA = false;
   return new Array(year, month, day, monthType);
+}
+
+// JD_TO_PRAHAR -- Determines prahara from Julian day
+function jd_to_prahar(jd) {
+  var sunrise = sunTimes_jd(jd, 0);
+  var sunset = sunTimes_jd(jd, 1);
+  if (sunset == sunrise)
+    return 0;
+  if (sunset < sunrise)
+    sunset++;
+  jd = (jd - 0.5)%1.0;
+  if (jd < sunrise)
+    jd++;
+  var dayGap = (sunset - sunrise)/4.0;
+  var nightGap = (sunset+1 - sunrise)/4.0;
+  var prahar;
+  if (jd < sunset) {
+    prahar = (jd - sunrise)/dayGap;
+  } else {
+    prahar = (jd - sunset)/dayGap + 4.0;
+  }
+  return Math.floor(prahar);
 }
 
 // SANKRANTI -- Determines Julian day of a sidereal zodiac angle in a particular year
@@ -1870,6 +1900,7 @@ function updateFromGregorian()
         document.hinducalendar.ritu.value = lang3Data.seasons[Math.floor(hinducal[1]/2.0)];
     } else
       document.hinducalendar.ritu.value = lang3Data.seasons[Math.floor((hinducal[1]-1)/2.0)];
+    document.hinducalendar.prahar.value = lang3Data.prahars[jd_to_prahar(j_real)];
     //  Update Indian Civil Calendar
 
     indcal = jd_to_indian_civil(j);
