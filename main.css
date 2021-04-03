@@ -132,6 +132,7 @@ span#showIslamicInfo:lang(ur) {
   direction: rtl;
   text-align: right;
   font-family: Nastaliq, Naskh, "Times New Roman", serif;
+  word-spacing: 2px;
 }
 :lang(hi) {
   font-family: DevanagariFont, "Devanagari MT", DevanagariSans, serif;
