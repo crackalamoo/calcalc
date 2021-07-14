@@ -446,7 +446,8 @@ function changeCity() {
       "johannesburg": [26.21, 1, 28.05, 0, 0, 2, "none"],
       "accra": [5.61, 0, 0.18, 1, 0, 0, "none"],
       "window rock": [35.68, 0, 109.05, 1, 1, 7, "uscanada"],
-      "walpi": [35.83, 0, 110.39, 1, 1, 7, "none"]
+      "walpi": [35.83, 0, 110.39, 1, 1, 7, "none"],
+      "gainesville": [29.6436, 0, 82.3549, 1, 1, 5, "uscanada"]
     }[city];
   }
   document.basic.latitude.value = data[0];
