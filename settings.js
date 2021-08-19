@@ -23,9 +23,9 @@ var dst = getLocalItem("dst", "none");
 var theme = getLocalItem("theme", "");
 
 var coordinates = [
-  getLocalItem("lat", "26 30 43"),
+  getLocalItem("lat", "29 38 52"),
   getLocalItem("NS", 0),
-  getLocalItem("long", "80 10 34"),
+  getLocalItem("long", "82 21 5"),
   getLocalItem("EW", 1)
 ];
 var hinduSettings = [
