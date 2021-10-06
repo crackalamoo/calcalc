@@ -64,7 +64,7 @@ const HOLIDAYS_HINDU = {"12,16": [["Holi"], [1867205]],
   "12,15": [["Holika Dahan", "Chhoti Holi"], [1867205, 1867205]], "1,13": [["Mahavir Jayanti"], [1502693]], "7,19": [["Karva Chauth"]],
   "8,6": [["Chhath"]], "4,15": [["Asalha Puja", "Guru Purnima"], [1575359]], "9,11": [["Gita Jayanti"]],
   "10,7": [["Guru Gobind Singh Jayanti"], [2329462]], "2,3": [["Akha Teej"]], "1,6": [["Yamuna Chhath"]],
-  "1,15": [["Hanuman Jayanti"], [1484017]], "9,15": [["Datta Jayanti"], [2232672]], "6,5": [["Samvatsari", 1503693]]
+  "1,15": [["Hanuman Jayanti"], [1484017]], "9,15": [["Datta Jayanti"], [2232672]], "6,5": [["Samvatsari"], [1503693]]
 };
 const HOLIDAYS_HEBREW = {"7,1": ["Rosh Hashanah"], "7,10": ["Yom Kippur"],
   "9,25": ["Start of Hanukkah"], "1,15": ["Start of Passover"],
