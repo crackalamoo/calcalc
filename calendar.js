@@ -1719,7 +1719,7 @@ function updateFromGregorian()
 
     // Update DST and time zone
     if (document.basic.dst.value != "none") {
-      if (is_dst(j)) document.getElementById("dstActive").innerHTML = "(Yes: " + formatTimeZone() + ")";
+      if (is_dst(j_real)) document.getElementById("dstActive").innerHTML = "(Yes: " + formatTimeZone() + ")";
       else document.getElementById("dstActive").innerHTML = "(No: " + formatTimeZone() + ")";
     } else {
       document.getElementById("dstActive").innerHTML = "(" + formatTimeZone() + ")";
@@ -2593,7 +2593,7 @@ function drawSundial(jd) {
 }
 
 // IS_DST -- Determine if a Julian day is daylight savings
-function is_dst(jd=null, startend=0) {
+function is_dst(jd=null) {
   if (jd == null) jd = document.julian.day.value;
   var greg = jd_to_gregorian(jd);
   var gregYear = greg[0];
