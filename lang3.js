@@ -23,7 +23,7 @@ function lang3_hi() {
   lang3Data.dayTypes = ["शुक्ल", "कृष्ण"];
   lang3Data.yearTypes = new Array("आम साल", "लंबा साल");
   lang3Data.dir = "ltr";
-  lang3Data.zodiacSign = "रास";
+  lang3Data.zodiacSign = "राशि";
   lang3Data.zodiac = ["मेष", "वृषभ", "मिथुन", "कर्क", "सिंह", "कन्या", "तुला",
     "वृश्चिक", "धनू", "मकर", "कुंभ", "मीन"];
   lang3Data.font = "DevanagariFont, serif";
@@ -81,7 +81,7 @@ function lang3_ur() {
                         "کرِشن"];
   lang3Data.yearTypes = new Array("عام سال", "لمبا سال");
   lang3Data.dir = "rtl";
-  lang3Data.zodiacSign = "راس";
+  lang3Data.zodiacSign = "راشی";
   lang3Data.zodiac = ["میش", "ورِشَبھ", "مِتھُن", "کَرک", "سِنگھ", "کَنیا", "تُلا",
     "ورِشچِک", "دھَنُو", "مَکَر", "کُمبھ", "مِین"];
   lang3Data.font = "Nastaliq, serif";
@@ -251,7 +251,7 @@ function lang3_mr() {
   lang3Data.dayTypes = ["शुक्ल", "वद्य"];
   lang3Data.yearTypes = new Array("सामान्य वर्ष", "लांब वर्ष");
   lang3Data.dir = "ltr";
-  lang3Data.zodiacSign = "रास";
+  lang3Data.zodiacSign = "राशी";
   lang3Data.zodiac = ["मेष", "वृषभ", "मिथुन", "कर्क", "सिंह", "कन्या", "तूळ",
     "वृश्चिक", "धनू", "मकर", "कुंभ", "मीन"];
   lang3Data.font = '"ITF Devanagari Marathi", DevanagariFont, serif';
