@@ -199,44 +199,42 @@ document.warning.warning.style.backgroundColor = "#A0FFA0";
   </select></div>
   <select name="city" onchange="changeCity();">
     <option value="other">-- Pick a city --</option>
-    <option value="gainesville">Gainesville</option>
+    <option value="providence">Providence</option>
     <option value="boynton">Boynton Beach</option>
+    <option value="nyc">New York City</option>
+    <option value="boston">Boston</option>
     <option value="mumbai">मुंबई (Mumbai/Bombay)</option>
     <option value="lahore">لاہور (Lahore)</option>
     <option value="chicago">Chicago</option>
-    <option value="nyc">New York City</option>
-    <option value="karachi">کراچی (Karachi)</option>
     <option value="islamabad">اسلام آباد (Islamabad)</option>
-    <option value="tokyo">東京 (Tokyo)</option>
-    <option value="jakarta">Jakarta</option>
-    <option value="delhi">दिल्ली (Delhi)</option>
-    <option value="manila">Maynilà (Manila)</option>
-    <option value="seoul">서울 (Seoul)</option>
-    <option value="shanghai">上海 (Shanghai)</option>
-    <option value="beijing">北京 (Beijing)</option>
-    <option value="mexico city">Ciudad de México (Mexico City)</option>
-    <option value="sao paulo">São Paulo</option>
-    <option value="lagos">Èkó (Lagos)</option>
-    <option value="cairo">القاهرة (Cairo)</option>
-    <option value="guangzhou">广州 (Guangzhou)</option>
-    <option value="dhaka">ঢাকা (Dhaka)</option>
-    <option value="osaka">大阪 (Osaka)</option>
-    <option value="moscow">Москва (Moscow)</option>
-    <option value="istanbul">İstanbul</option>
-    <option value="bangkok">บางกอก (Bangkok)</option>
-    <option value="la">Los Angeles</option>
-    <option value="tehran">تهران (Tehran)</option>
     <option value="london">London</option>
     <option value="paris">Paris</option>
+    <option value="tokyo">東京 (Tokyo)</option>
+    <option value="la">Los Angeles</option>
+    <option value="beijing">北京 (Beijing)</option>
+    <option value="singapore">Singapore</option>
+    <option value="shanghai">上海 (Shanghai)</option>
+    <option value="seoul">서울 (Seoul)</option>
     <option value="chennai">சென்னை (Chennai/Madras)</option>
+    <option value="dubai">دبي (Dubai)</option>
+    <option value="jakarta">Jakarta</option>
+    <option value="sydney">Sydney</option>
+    <option value="delhi">दिल्ली (Delhi)</option>
+    <option value="bangkok">บางกอก (Bangkok)</option>
+    <option value="istanbul">İstanbul</option>
+    <option value="sao paulo">São Paulo</option>
+    <option value="san francisco">San Francisco</option>
+    <option value="mexico city">Ciudad de México (Mexico City)</option>
+    <option value="lagos">Lagos</option>
+    <option value="moscow">Москва (Moscow)</option>
+    <option value="karachi">کراچی (Karachi)</option>
     <option value="lima">Lima</option>
+    <option value="cairo">القاهرة (Cairo)</option>
+    <option value="tehran">تهران (Tehran)</option>
     <option value="washington">Washington, D.C.</option>
     <option value="johannesburg">Johannesburg</option>
-    <option value="san francisco">San Francisco</option>
-    <option value="sydney">Sydney</option>
-    <option value="dubai">دبي (Dubai)</option>
     <option value="rome">Roma (Rome)</option>
-    <option value="accra">Accra</option>
+    <option value="athens">Αθήνα (Athens)</option>
     <option value="ujjain">उज्जैन (Ujjain)</option>
   </select><br>
   <button name="getLocation" onclick="setLocation();">Set to current location</button><br>
@@ -299,8 +297,9 @@ document.warning.warning.style.backgroundColor = "#A0FFA0";
       Sun
   </th>
   <td align="center">
-    <span id="sunInfoDawn">Dawn: <input type="text" name="hourS4" value="18" size="2" readonly="readonly" />:<input
-         type="text" name="minS4" value="00" size="2" readonly="readonly" /><br></span>
+    <span id="sunInfoDawn">
+      Dawn: <input type="text" name="hourS4" value="18" size="2" readonly="readonly" />:<input
+       type="text" name="minS4" value="00" size="2" readonly="readonly" /><br></span>
       Rise: <input type="text" name="hourS2" value="06" size="2" readonly="readonly" />:<input
         type="text" name="minS2" value="00" size="2" readonly="readonly" /><br>
       Noon: <input type="text" name="hourS3" value="12" size="2" readonly="readonly" />:<input
@@ -309,7 +308,9 @@ document.warning.warning.style.backgroundColor = "#A0FFA0";
       	   type="text" name="minS" value="00" size="2" readonly="readonly" /><br>
       <div id="sunInfo">
         Dusk: <input type="text" name="hourS5" value="18" size="2" readonly="readonly" />:<input
-         	  type="text" name="minS5" value="00" size="2" readonly="readonly" /><br>
+            type="text" name="minS5" value="00" size="2" readonly="readonly" /><br>
+        Local time: <input type="text" name="hourS7" value="18" size="2" readonly="readonly" />:<input
+          type="text" name="minS7" value="00" size="2" readonly="readonly" /><br>
         Day length: <input type="text" name="hourS6" value="18" size="2" readonly="readonly" />:<input
              type="text" name="minS6" value="00" size="2" readonly="readonly" /><br><br>
         Hour angle: <input type="text" name="hourAngle" value="0" size="8" readonly="readonly" /><br>
@@ -2741,7 +2742,7 @@ Sausalito CA: University Science Books,
   <address><span class="noItalics">
     <span lang="en">Harys Dalvi</span><br>
     <span lang="ur">حارث دلوی</span><br>
-    <span lang="hi">हारिस</span> <span lang="mr">दळवी</span><br>
+    <span lang="hi">हारिस दळवी</span><br>
     <span lang="en">December, MMXVIII&nbsp;&ndash;&nbsp;April, MMXXI</span><br>
     <span lang="ur">دسمبر  ۲۰۱۸ء&nbsp;&ndash;&nbsp;اپریل ۲۰۲۱ء<br>
     اگہن سموت ۱۹۴۰&nbsp;&ndash;&nbsp;چیت سموت ۱۹۴۳</span><br>
@@ -2758,7 +2759,7 @@ September, MMXV
 </address>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 <center>
-<i>This document is in the public domain.</i>
+<i>This document is in the public domain.</i><br><a href="http://www.harysdalvi.com/sub/single-file/privacy.html">Privacy Policy</a>
 </center>
 </body>
 </html>

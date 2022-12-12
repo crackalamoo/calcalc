@@ -2721,8 +2721,19 @@ function updateSun() {
   }
   document.basic.hourS6.value = formatTime(h, 24, true);
   document.basic.minS6.value = formatTime(m, 60);
-  date[1]++;
-  date = gregorian_to_jd(date[0], date[1], date[2]);
+  h = hour - sunTimes(date, 2)[0] + 12;
+  m = min - sunTimes(date, 2)[1];
+  while (m < 0) {
+    m += 60;
+    h--;
+  }
+  while (h < 0) {
+    m -= 60;
+    h++;
+  }
+  document.basic.hourS7.value = formatTime(h, 24, true);
+  document.basic.minS7.value = formatTime(m, 60);
+  date = gregorian_to_jd(date[0], date[1]+1, date[2]);
   date += hour/24.0 + min/1440.0 + sec/86400.0;
   var values = sunpos2(date);
   document.basic.hourAngle.value = Math.round(values[0]*100)/100.0 + "°";

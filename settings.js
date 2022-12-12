@@ -23,9 +23,9 @@ var dst = getLocalItem("dst", "none");
 var theme = getLocalItem("theme", "");
 
 var coordinates = [
-  getLocalItem("lat", "29 38 52"),
+  getLocalItem("lat", "41 49 31"),
   getLocalItem("NS", 0),
-  getLocalItem("long", "82 21 5"),
+  getLocalItem("long", "71 24 8"),
   getLocalItem("EW", 1)
 ];
 var hinduSettings = [
@@ -410,25 +410,18 @@ function changeCity() {
       "nyc": [40.71, 0, 74.01, 1, 1, 5, "uscanada"],
       "karachi": [24.86, 0, 67.01, 0, 0, 5, "none"],
       "islamabad": [33.68, 0, 73.05, 0, 0, 5, "none"],
-      "ratnagiri": [16.99, 0, 73.31, 0, 0, 5.5, "none"],
-      "murud": [17.78, 0, 73.12, 0, 0, 5.5, "none"],
       "tokyo": [35.68, 0, 139.65, 0, 0, 9, "none"],
       "jakarta": [6.21, 1, 106.85, 0, 0, 7, "none"],
       "delhi": [28.71, 0, 77.11, 0, 0, 5.5, "none"],
-      "manila": [14.59, 0, 120.99, 0, 0, 8, "none"],
       "seoul": [37.57, 0, 126.98, 0, 0, 9, "none"],
       "shanghai": [31.23, 0, 121.47, 0, 0, 8, "none"],
       "beijing": [39.91, 0, 116.41, 0, 0, 8, "none"],
       "sao paulo": [23.55, 1, 46.63, 1, 1, 3, "none"],
       "mexico city": [19.43, 0, 99.13, 1, 1, 6, "mexico"],
-      "guangzhou": [23.13, 0, 113.26, 0, 0, 8, "none"],
-      "dhaka": [23.81, 0, 90.41, 0, 0, 6, "none"],
-      "osaka": [34.69, 0, 135.51, 0, 0, 9, "none"],
       "moscow": [55.76, 0, 37.62, 0, 0, 3, "none"],
       "cairo": [30.04, 0, 31.24, 0, 0, 2, "none"],
       "bangkok": [13.76, 0, 100.51, 0, 0, 7, "none"],
       "la": [34.05, 0, 118.24, 1, 1, 8, "uscanada"],
-      "mecca": [21.39, 0, 39.86, 0, 0, 3, "none"],
       "tehran": [35.69, 0, 51.39, 0, 0, 3.5, "iran"],
       "san francisco": [37.78, 0, 122.42, 1, 1, 8, "uscanada"],
       "rome": [41.91, 0, 12.49, 0, 0, 1, "europe"],
@@ -444,10 +437,10 @@ function changeCity() {
       "washington": [38.91, 0, 77.04, 1, 1, 5, "uscanada"],
       "delray": ["26 26 13", 0, "80 08 25", 1, 1, 5, "uscanada"],
       "johannesburg": [26.21, 1, 28.05, 0, 0, 2, "none"],
-      "accra": [5.61, 0, 0.18, 1, 0, 0, "none"],
-      "window rock": [35.68, 0, 109.05, 1, 1, 7, "uscanada"],
-      "walpi": [35.83, 0, 110.39, 1, 1, 7, "none"],
-      "gainesville": [29.6436, 0, 82.3549, 1, 1, 5, "uscanada"]
+      "providence": [41.83, 0, 71.4, 1, 1, 5, "uscanada"],
+      "singapore": [1.35, 0, 103.82, 0, 0, 8, "none"],
+      "athens": [37.98, 0, 23.73, 0, 0, 2, "europe"],
+      "boston": [42.36, 0, 71.06, 1, 1, 5, "uscanada"]
     }[city];
   }
   document.basic.latitude.value = data[0];
