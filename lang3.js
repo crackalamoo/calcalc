@@ -11,7 +11,7 @@ function lang3_hi() {
       "गुरुवार", "शुक्रवार", "शनिवार");
   lang3Data.beginning = "संवत";
   lang3Data.months = new Array("चैत", "बैसाख", "जेठ", "असाढ़", "सावन", "भादों",
-    "असोज", "कातिक", "मंगसिर", "पूस", "माघ", "फागुन");
+    "असोज", "कार्तिक", "अगहन", "पूस", "माघ", "फालगुन");
   lang3Data.shuddh = "शुद्ध";
   lang3Data.adhik = "अधिक";
   lang3Data.eras = new Array("बिक्रम", "शक", "कलियुग", "बंगाली", "नानकशाही", "गुजराती");
@@ -19,7 +19,7 @@ function lang3_hi() {
   lang3Data.poonam = "पूनम";
   lang3Data.moon = "चाँद";
   lang3Data.dayNames = ["अमावस", "परिवा", "दूज", "तीज", "चौथ", "पंचमी",
-    "छठ", "सप्तमी", "अष्टमी", "नौमी", "दसमी", "ग्यारस", "बारस", "तेरस", "चौदस", "पूनम"];
+    "छठ", "सप्तमी", "अष्टमी", "नवमी", "दशमी", "एकादशी", "द्वादशी", "तेरस", "चौदस", "पूनम"];
   lang3Data.dayTypes = ["शुक्ल", "कृष्ण"];
   lang3Data.yearTypes = new Array("आम साल", "लंबा साल");
   lang3Data.dir = "ltr";
@@ -31,7 +31,7 @@ function lang3_hi() {
   lang3Data.india = "भारत से?";
   lang3Data.ayanamsha = "अयनांश";
   lang3Data.numberMap = "hi";
-  lang3Data.seasons = ["बसंत", "गर्मी", "बरसात", "पतझड़", "हेमंत", "सर्दी"];
+  lang3Data.seasons = ["बसंत", "गरमियाँ", "बरसात", "पतझड़", "सरदियाँ (हेमंत)", "सरदियाँ (शिशिर)"];
   lang3Data.ritu = "रुत";
   lang3Data.prahar = "पहर";
   lang3Data.prahars = ["दिन का पहला पहर", "दिन का दूसरा पहर", "दिन का तीसरा पहर", "दिन का चौथा पहर",
@@ -51,7 +51,7 @@ function lang3_ur() {
                                "جمعرات",
                                "جمعہ",
                                "ہفتہ");
-  lang3Data.beginning = "سمت";
+  lang3Data.beginning = "سموَت";
   lang3Data.months = new Array("چیت",
     "بیساکھ",
     "جیٹھ",
@@ -59,11 +59,11 @@ function lang3_ur() {
     "ساون",
     "بھادوں",
     "اسوج",
-    "کاتک",
-    "منگسر",
+    "کارتک",
+    "اگہن",
     "پوس",
     "ماگھ",
-    "پھاگن");
+    "پھالگن");
   lang3Data.shuddh = "شُدھ";
   lang3Data.adhik = "ادھِک";
   lang3Data.eras = new Array("بکرم",
@@ -76,7 +76,7 @@ function lang3_ur() {
   lang3Data.poonam = "پونم";
   lang3Data.moon = "چاند";
   lang3Data.dayNames = ["اماوس", "پروا", "دوج", "تیج", "چوتھ", "پنچمی",
-    "چھٹ", "سپتمی", "اشٹمی", "نومی", "دسمی", "گیارس", "بارس", "تیرس", "چودس", "پونم"];
+    "چھٹھ", "سپتمی", "اشٹمی", "نوَمی", "دشمی", "ایکادشی", "دوادشی", "تیرس", "چودس", "پونم"];
   lang3Data.dayTypes = ["شُکل",
                         "کرِشن"];
   lang3Data.yearTypes = new Array("عام سال", "لمبا سال");
@@ -89,7 +89,7 @@ function lang3_ur() {
   lang3Data.india = "بھارت سے؟";
   lang3Data.ayanamsha = "اینامش";
   lang3Data.numberMap = "ur";
-  lang3Data.seasons = ["بسنت", "گرمی", "برسات", "پتجھڑ", "ہیمنت", "سردی"];
+  lang3Data.seasons = ["بسنت", "گرمیاں", "برسات", "پتجھڑ", "سردیاں (ہیمنت)", "سردیاں (شِشِر)"];
   lang3Data.ritu = "رُت";
   lang3Data.prahar = "پہر";
   lang3Data.prahars = ["دن کا پہلا پہر", "دن کا دوسرا پہر", "دن کا تیسرا پہر", "دن کا چوتھا پہر",
