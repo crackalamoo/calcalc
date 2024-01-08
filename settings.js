@@ -250,6 +250,7 @@ function changeLanguage3(l=null, start=false) {
   document.hinducalendar.solarDay.style.fontFamily = lang3Data.font2;
   document.hinducalendar.weekday.style.fontFamily = lang3Data.font2;
   document.hinducalendar.ritu.style.fontFamily = lang3Data.font2;
+  document.hinducalendar.prahar.style.fontFamily = lang3Data.font2;
   document.indiancivilcalendar.leap.style.fontFamily = lang3Data.font2;
   document.indiancivilcalendar.weekday.style.fontFamily = lang3Data.font2;
   document.getElementById("indiaLabel").innerHTML = lang3Data.india;

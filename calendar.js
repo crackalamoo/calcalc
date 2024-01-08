@@ -2466,7 +2466,7 @@ function drawMap() {
   var latitude = 90 - getLatitude();
   var longitude = 180 + getLongitude();
   const SCALE = 4.0;
-  let width = window.innerWidth * 0.5;
+  let width = document.body.clientWidth * 0.6;
   let height = width/2.0;
   longitude *= (width/360.0);
   latitude *= (height/180.0);
