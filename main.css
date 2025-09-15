@@ -67,14 +67,14 @@ span.bcad {
 text-transform: lowercase;
 }
 
-a {
+a,h3 a.button {
   text-decoration: none;
   color: #0A0AFF;
 }
-a:visited {
+a:visited,h3 a.button:visited {
   color: #0A0AFF;
 }
-a:hover {
+a:hover,h3 a.button:hover {
   color: #0AFF0A;
 }
 h3 a {
