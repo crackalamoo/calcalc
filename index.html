@@ -4,7 +4,7 @@
 <head>
 <title>Calendar Converter Pro</title>
 <meta charset="UTF-8">
-<base href="https://harysdalvi.com/sub/calcalc/">
+<!-- <base href="https://harysdalvi.com/sub/calcalc/"> -->
 <link rel="shortcut icon" href="icon.png">
 <link rel="icon" href="icon.png">
 <link rel="mask-icon" href="icon.png">
@@ -198,13 +198,14 @@ document.warning.warning.style.backgroundColor = "#A0FFA0";
   </select></div>
   <select name="city" onchange="changeCity();">
     <option value="other">-- Pick a city --</option>
-    <option value="providence">Providence</option>
+    <option value="san francisco">San Francisco</option>
     <option value="boynton">Boynton Beach</option>
     <option value="nyc">New York City</option>
+    <option value="providence">Providence</option>
     <option value="boston">Boston</option>
+    <option value="chicago">Chicago</option>
     <option value="mumbai">मुंबई (Mumbai/Bombay)</option>
     <option value="lahore">لاہور (Lahore)</option>
-    <option value="chicago">Chicago</option>
     <option value="islamabad">اسلام آباد (Islamabad)</option>
     <option value="london">London</option>
     <option value="paris">Paris</option>
@@ -222,7 +223,6 @@ document.warning.warning.style.backgroundColor = "#A0FFA0";
     <option value="bangkok">บางกอก (Bangkok)</option>
     <option value="istanbul">İstanbul</option>
     <option value="sao paulo">São Paulo</option>
-    <option value="san francisco">San Francisco</option>
     <option value="mexico city">Ciudad de México (Mexico City)</option>
     <option value="lagos">Lagos</option>
     <option value="moscow">Москва (Moscow)</option>
@@ -443,7 +443,8 @@ prior to October 4, 1957, all satellite-related MJDs are
 positive.
 </p></div><span id="showJulianDayInfo"></span><br><br clear="all"><br clear="all">
 
-<h3><a name="gregorian" id="gregCalName">Gregorian Calendar</a></h3>
+<section id="gregorian-section">
+<h3><a name="gregorian" id="gregCalName">Gregorian Calendar</a> <a class="button" onclick="hideSection('gregorian-section')">(Hide)</a></h3>
 
 <form name="gregorian" action="javascript:void(0);">
 <table class="l">
@@ -544,10 +545,11 @@ of 365.24225 days per year which, compared to the actual mean year
 of 365.24219878, is equivalent to an error of one day over a period
 of about 19,500 years; this is comparable to errors due to tidal
 braking of the rotation of the Earth.
-</p></div><span id="showGregorianInfo"></span>
+</p></div><span id="showGregorianInfo"></span></section>
 <br clear="left" />
 
-<h3><a name="islamic" id="islamicCalName">اسلامی تقویم</a></h3>
+<section id="islamic-section">
+<h3><a name="islamic" id="islamicCalName">اسلامی تقویم</a> <a class="button" onclick="hideSection('islamic-section')">(Hide)</a></h3>
 
 <form name="islamic" action="javascript:void(0);">
 <table class="l">
@@ -722,11 +724,12 @@ the crescent of the new Moon.
   اِس تقویم کا استعمال اسلامی ملکوں میں ہوتا ہے سِوِل کیلنڈر کے لئے؛ مذہب کے لئے مہینے
   چاند کے ہلال کی نظر پہ شروع ہوتے ہیں۔
 </p>
-</div><span lang="ur" id="showIslamicInfo"></span><br><br>
+</div><span lang="ur" id="showIslamicInfo"></span></section><br><br>
 
 <br clear="left" />
 
-<h3><a name="hindu" id="hinduCalName">हिंदू पंचांग</a></h3>
+<section id="hindu-section">
+<h3><a name="hindu" id="hinduCalName">हिंदू पंचांग</a> <a class="button" onclick="hideSection('hindu-section')">(Hide)</a></h3>
 
 <form name="hinducalendar" action="javascript:void(0);">
 <table class="l">
@@ -1042,9 +1045,10 @@ the crescent of the new Moon.
 </p>
 </div><span lang="hi" id="showHinduInfo"></span><br><br clear="right">
 <br clear="all" />
+</section>
 
-<h3 style="font-family: 'Times New Roman'"><a name="hebrew" id="hebCalName">הַלּוּחַ הָעִבְרִי</a></h3>
-
+<section id="hebrew-section">
+<h3 style="font-family: 'Times New Roman'"><a name="hebrew" id="hebCalName">הַלּוּחַ הָעִבְרִי</a> <a class="button" onclick="hideSection('hebrew-section')">(Hide)</a></h3>
 <form name="hebrew" action="javascript:void(0);">
 
 <table class="l">
@@ -1134,10 +1138,10 @@ the calendar accumulates one day of error with respect to
 the solar year every 216 years.
 </p></div><span id="showHebrewInfo"></span>
 <br clear="left">
+</section>
 
-
-<h3 style="font-family: 'Times New Roman'"><a name="persiana" id="persianCalName">گاه‌شماری ایرانی‎</a></h3>
-
+<section id="persiana-section">
+<h3 style="font-family: 'Times New Roman'"><a name="persiana" id="persianCalName">گاه‌شماری ایرانی‎</a> <a class="button" onclick="hideSection('persiana-section')">(Hide)</a></h3>
 <form name="persiana" action="javascript:void(0);">
 <table class="l">
 
@@ -1251,6 +1255,8 @@ seem to apply.
 </p>
 </div><span id="showPersianInfo"></span>
 <br clear="left">
+</section>
+</section>
 
 <!-- <h3><a style="font-family: 'Times New Roman', 'Songti SC';" name="chinese" id="chineseCalName"></a></h3>
 
@@ -1325,7 +1331,8 @@ Emperor.</p>
 </div><span id="showChineseInfo"></span>
 <br clear="left" /> -->
 
-<h3><a name="indian" id="indianCalName">भारतीय राष्ट्रीय पंचांग</a></h3>
+<section id="indian-section">
+<h3><a name="indian" id="indianCalName">भारतीय राष्ट्रीय पंचांग</a> <a class="button" onclick="hideSection('indian-section')">(Hide)</a></h3>
 
 <form name="indiancivilcalendar" action="javascript:void(0);">
 <table class="l">
@@ -1412,11 +1419,11 @@ apply the Gregorian calendar rule to the sum.
 <br clear="left">
 </p></div><span id="showIndianInfo"></span>
 <br clear="left" />
+</section>
 
 
-</p>
-
-<h3 style="font-family: 'Times New Roman';"><a name="mesoamerican">Mesoamerican Calendars</a></h3>
+<section id="mesoamerican-section">
+<h3 style="font-family: 'Times New Roman';"><a name="mesoamerican">Mesoamerican Calendars</a> <a class="button" onclick="hideSection('mesoamerican-section')">(Hide)</a></h3>
 <form name="mayancount" action="javascript:void(0);">
 <table class="l">
 
@@ -1787,11 +1794,12 @@ apply the Gregorian calendar rule to the sum.
   llamado <i lang="nci">xiuhpōhualli</i> en náhuatl, aunque los dos tienen 365 días.
   Los dos tenían un ciclo religioso de 260 días y un ciclo civil de 365 días.
   Aquí se puede elegir entre los calendarios maya y azteca.</p>
-</div><span id="showMayanInfo"></span><br><br clear="right">
+</div><span id="showMayanInfo"></span><br></section><br clear="right">
 
 <br clear="left" /><br clear="right" /><br>
 
-<h3 style="font-family: 'Times New Roman';"><a name="juliancalendar">Julian Calendar</a></h3>
+<section id="juliancalendar-section">
+<h3 style="font-family: 'Times New Roman';"><a name="juliancalendar">Julian Calendar</a> <a class="button" onclick="hideSection('juliancalendar-section')">(Hide)</a></h3>
 <form name="juliancalendar" action="javascript:void(0);">
 <table class="l">
 
@@ -1853,9 +1861,10 @@ Being a purely solar calendar, no attempt is made to synchronise the
 start of months to the phases of the Moon.
 </p>
 <br clear="left">
+</section>
 
-<h3 style="font-family: 'Times New Roman';"><a name="ISO8601">ISO-8601 Week and Day, and Day of Year</a></h3>
-
+<section id="iso8601-section">
+<h3 style="font-family: 'Times New Roman';"><a name="ISO8601">ISO-8601 Week and Day, and Day of Year</a> <a class="button" onclick="hideSection('iso8601-section')">(Hide)</a></h3>
 <form name="isoweek" action="javascript:void(0);">
 <table class="l">
 
@@ -1898,9 +1907,10 @@ start of months to the phases of the Moon.
 </form>
 
 <br clear="left" />
+</section>
 
-<h3 style="font-family: 'Times New Roman';"><a name="mangli">Martian Mangli Calendar</a></h3>
-
+<section id="mangli-section">
+<h3 style="font-family: 'Times New Roman';"><a name="mangli">Martian Mangli Calendar</a> <a class="button" onclick="hideSection('mangli-section')">(Hide)</a></h3>
 <form name="manglicalendar" action="javascript:void(0);">
 <table class="l">
 
@@ -2140,7 +2150,7 @@ start of months to the phases of the Moon.
   and is commonly used by scientists for tracking time on Mars.
 </p>
 <p>Times given are local times for the prime meridian of Mars.</p>
-</div><span id="showMangliInfo"></span>
+</div><span id="showMangliInfo"></span></section>
 <br clear="all">
 
 <h3 style="font-family: 'Times New Roman';"><a name="calendarmaker">Calendar Maker</a></h3>
@@ -2310,6 +2320,10 @@ function toggleMap(forceClose=false) {
   }
 }
 toggleMap(true);
+function hideSection(section) {
+  let sec = document.getElementById(section);
+  if (sec) sec.style.display = "none";
+}
 
 document.calendarMaker.toggle.style.display = "none";
 calendarBox.style.display = "none";
