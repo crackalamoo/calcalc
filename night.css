@@ -10,13 +10,13 @@ body.night button:active {
   background-color: #2255CC;
 }
 
-body.night a {
+body.night a,body.night h3 a.button {
   color: #6070FF;
 }
-body.night a:visited {
+body.night a:visited,body.night h3 a.button:visited {
   color: #6070FF;
 }
-body.night a:hover {
+body.night a:hover,body.night h3 a.button:hover {
   color: #0AFF0A;
 }
 body.night h3 a {

@@ -10,13 +10,13 @@ body.ocean button:active {
   background-color: #07C9E8;
 }
 
-body.ocean a {
+body.ocean a,body.ocean h3 a.button {
   color: #0AFF0A;
 }
-body.ocean a:visited {
+body.ocean a:visited,body.ocean h3 a.button:visited {
   color: #0AFF0A;
 }
-body.ocean a:hover {
+body.ocean a:hover,body.ocean h3 a.button:hover {
   color: #EEFF0A;
 }
 body.ocean h3 a {

@@ -5,13 +5,13 @@ body.silver button:active {
   background-color: #888888;
 }
 
-body.silver a {
+body.silver a,body.silver h3 a.button {
   color: #6070FF;
 }
-body.silver a:visited {
+body.silver a:visited,body.silver h3 a.button:visited {
   color: #6070FF;
 }
-body.silver a:hover {
+body.silver a:hover,body.silver h3 a.button:hover {
   color: #CCCCCC;
 }
 body.silver h3 a {
