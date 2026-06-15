@@ -2034,6 +2034,14 @@ function subtractJulian() {
   let change = new Number(document.julianday.change.value);
   setJulian(j - change);
 }
+function nextDay() {
+  let j = new Number(document.julianday.day.value);
+  setJulian(j + 1);
+}
+function previousDay() {
+  let j = new Number(document.julianday.day.value);
+  setJulian(j - 1);
+}
 var playPauseInterval;
 function playPauseJulian() {
   var button = document.julianday.playPause;
