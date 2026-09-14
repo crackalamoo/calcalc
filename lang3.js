@@ -26,8 +26,8 @@ function lang3_hi() {
   lang3Data.zodiacSign = "राशि";
   lang3Data.zodiac = ["मेष", "वृषभ", "मिथुन", "कर्क", "सिंह", "कन्या", "तुला",
     "वृश्चिक", "धनू", "मकर", "कुंभ", "मीन"];
-  lang3Data.font = "DevanagariFont, serif";
-  lang3Data.font2 = "DevanagariSans, system-ui";
+  lang3Data.font = '"Noto Serif Devanagari", serif';
+  lang3Data.font2 = '"Kohinoor Devanagari", "Nirmala UI", system-ui';
   lang3Data.india = "भारत से?";
   lang3Data.ayanamsha = "अयनांश";
   lang3Data.numberMap = "hi";
@@ -84,8 +84,8 @@ function lang3_ur() {
   lang3Data.zodiacSign = "راشی";
   lang3Data.zodiac = ["میش", "ورِشَبھ", "مِتھُن", "کَرک", "سِنگھ", "کَنیا", "تُلا",
     "ورِشچِک", "دھَنُو", "مَکَر", "کُمبھ", "مِین"];
-  lang3Data.font = "Nastaliq, serif";
-  lang3Data.font2 = 'Naskh, "Times New Roman"';
+  lang3Data.font = 'Gulzar, serif';
+  lang3Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
   lang3Data.india = "بھارت سے؟";
   lang3Data.ayanamsha = "اینامش";
   lang3Data.numberMap = "ur";
@@ -141,8 +141,8 @@ function lang3_pa_pk() {
   lang3Data.zodiacSign = "راشی";
   lang3Data.zodiac = ["میش", "ورِشَبھ", "مِتھُن", "کَرک", "سِنگھ", "کَنیا", "تُلا",
     "ورِشچِک", "دھَنُو", "مَکَر", "کُمبھ", "مِین"];
-  lang3Data.font = "Nastaliq, serif";
-  lang3Data.font2 = 'Naskh, "Times New Roman"';
+  lang3Data.font = 'Gulzar, serif';
+  lang3Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
   lang3Data.india = "بھارت توں؟";
   lang3Data.ayanamsha = "اینامش";
   lang3Data.numberMap = "ur";
@@ -215,8 +215,8 @@ function lang3_sa() {
   lang3Data.zodiacSign = "राशिः";
   lang3Data.zodiac = ["मेषः", "वृषभः", "मिथुनम्", "कर्कटः", "सिंहः", "कन्या", "तुला",
     "वृश्चिकः", "धनुः", "मकरः", "कुम्भः", "मीनः"];
-  lang3Data.font = "DevanagariFont, serif";
-  lang3Data.font2 = "DevanagariSans, system-ui";
+  lang3Data.font = '"Noto Serif Devanagari", serif';
+  lang3Data.font2 = '"Kohinoor Devanagari", "Nirmala UI", system-ui';
   lang3Data.india = "भारतदेशात्?";
   lang3Data.ayanamsha = "अयनांशः";
   lang3Data.numberMap = "hi";
@@ -254,8 +254,8 @@ function lang3_mr() {
   lang3Data.zodiacSign = "राशी";
   lang3Data.zodiac = ["मेष", "वृषभ", "मिथुन", "कर्क", "सिंह", "कन्या", "तूळ",
     "वृश्चिक", "धनू", "मकर", "कुंभ", "मीन"];
-  lang3Data.font = '"ITF Devanagari Marathi", DevanagariFont, serif';
-  lang3Data.font2 = "DevanagariSans, system-ui";
+  lang3Data.font = '"ITF Devanagari Marathi", "Noto Serif Devanagari", serif';
+  lang3Data.font2 = '"Kohinoor Devanagari", "Nirmala UI", system-ui';
   lang3Data.india = "भारत हून?";
   lang3Data.ayanamsha = "अयनांश";
   lang3Data.numberMap = "hi";

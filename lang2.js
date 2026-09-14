@@ -2,8 +2,8 @@ var lang2Data = {};
 
 function lang2_ur() {
   lang2Data.language = "اسلامی تقویم";
-  lang2Data.font = 'Nastaliq, Naskh, "Times New Roman", serif';
-  lang2Data.font2 = 'Naskh, "Times New Roman", serif';
+  lang2Data.font = 'Gulzar, "Scheherazade New", "Times New Roman", serif';
+  lang2Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman", serif';
   lang2Data.weekday = "ہفتے کا دن";
   lang2Data.weekdays = new Array("اتوار",
                                "پیر",
@@ -52,8 +52,8 @@ function lang2_ur() {
 
 function lang2_ar() {
   lang2Data.language = "التقويم الإسلامي";
-  lang2Data.font = 'Naskh, "Times New Roman"';
-  lang2Data.font2 = 'Naskh, "Times New Roman"';
+  lang2Data.font = '"Scheherazade New", "Times New Roman"';
+  lang2Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
   lang2Data.weekday = "الیوم الأسبوع";
   lang2Data.weekdays = new Array("الأحد",
                                "الاثنين",
@@ -151,8 +151,8 @@ function lang2_en() {
 
 function lang2_hi() {
   lang2Data.language = "इस्लामी कैलेंडर";
-  lang2Data.font = 'DevanagariFont, DevanagariSans, "Times New Roman", serif';
-  lang2Data.font2 = 'DevanagariSans, "Times New Roman"';
+  lang2Data.font = '"Noto Serif Devanagari", "Kohinoor Devanagari", "Nirmala UI", "Times New Roman", serif';
+  lang2Data.font2 = '"Kohinoor Devanagari", "Nirmala UI", "Times New Roman"';
   lang2Data.weekday = "हफ़्ते का दिन";
   lang2Data.weekdays = new Array("इतवार",
                                "पीर",
@@ -246,8 +246,8 @@ function lang2_id() {
 
 function lang2_fa() {
   lang2Data.language = "گاه‌شماری هجری قمری";
-  lang2Data.font = 'Naskh, "Times New Roman", serif';
-  lang2Data.font2 = 'Naskh, "Times New Roman", serif';
+  lang2Data.font = '"Scheherazade New", "Times New Roman", serif';
+  lang2Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman", serif';
   lang2Data.weekday = "روزِ هفته";
   lang2Data.weekdays = new Array("یک شنبه",
                                "دوشنبه",

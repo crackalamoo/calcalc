@@ -10,8 +10,8 @@ function lang4_fa() {
                                "جمعه",
                                "شنبه");
   lang4Data.weekday = "روزِ هفته";
-  lang4Data.font = 'Naskh, "Times New Roman"';
-  lang4Data.font2 = 'Naskh, "Times New Roman"';
+  lang4Data.font = '"Scheherazade New", "Times New Roman"';
+  lang4Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
   lang4Data.persian = "گاه‌شماری ایران";
   lang4Data.date = "تاریخ";
   lang4Data.beginning = "شروع";
@@ -47,8 +47,8 @@ function lang4_ku_cbk() {
                                "هه‌ینی",
                                "شه‌ممه‌");
   lang4Data.weekday = "ڕۆژێ هه‌فته‌";
-  lang4Data.font = 'Naskh, "Times New Roman"';
-  lang4Data.font2 = 'Naskh, "Times New Roman"';
+  lang4Data.font = '"Scheherazade New", "Times New Roman"';
+  lang4Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
   lang4Data.persian = "ڕۆژژمێری کوردی";
   lang4Data.date = "مێژوو";
   lang4Data.beginning = "سه‌ره‌تا";
@@ -115,8 +115,8 @@ function lang4_ps() {
                                "جمعه",
                                "شنبه");
   lang4Data.weekday = "د اونۍ ورځ";
-  lang4Data.font = 'Naskh, "Times New Roman"';
-  lang4Data.font2 = 'Naskh, "Times New Roman"';
+  lang4Data.font = '"Scheherazade New", "Times New Roman"';
+  lang4Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
   lang4Data.persian = "لمريز لېږديز کالهندارهن";
   lang4Data.date = "نیټه";
   lang4Data.beginning = "ابتدا";

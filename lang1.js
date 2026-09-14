@@ -100,8 +100,8 @@ function lang1_hi() {
   lang1Data.dir = "ltr";
   lang1Data.CE = " सी.ई.";
   lang1Data.BCE = " बी.सी.ई.";
-  lang1Data.font = "DevanagariFont";
-  lang1Data.font2 = "DevanagariSans";
+  lang1Data.font = "Noto Serif Devanagari";
+  lang1Data.font2 = '"Kohinoor Devanagari", "Nirmala UI"';
   lang1Data.romanNumerals = false;
 }
 function lang1_ur() {
@@ -125,8 +125,8 @@ function lang1_ur() {
   lang1Data.dir = "rtl";
   lang1Data.CE = "ء";
   lang1Data.BCE = " بی سی ای";
-  lang1Data.font = "Nastaliq";
-  lang1Data.font2 = "Naskh";
+  lang1Data.font = "Gulzar";
+  lang1Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
   lang1Data.romanNumerals = false;
 }
 

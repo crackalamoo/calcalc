@@ -5,29 +5,6 @@ body {
     color: #000000;
 }
 
-@font-face {
-  font-family: DevanagariFont;
-  font-weight: normal;
-  src: url('fonts/ITFDevanagari-Regular-01.ttf') format("truetype");
-}
-@font-face {
-  font-family: DevanagariFont;
-  font-weight: bold;
-  src: url('fonts/ITFDevanagari-Bold-02.ttf') format("truetype");
-}
-@font-face {
-  font-family: Naskh;
-  src: url('fonts/geezapro.ttc');
-}
-@font-face {
-  font-family: Nastaliq;
-  src: url('fonts/nastaliq.ttf');
-}
-@font-face {
-  font-family: DevanagariSans;
-  src: url('fonts/kohinoor.ttc');
-}
-
 select {
   height: 25px;
   background-color: #FFFFFF;
@@ -36,7 +13,7 @@ select:hover,button:hover {
   background-color: #CCFFEE;
 }
 select.islamicSelect {
-  font-family: "Geeza Pro", Naskh, serif;
+  font-family: "Geeza Pro", "Traditional Arabic", serif;
   direction: rtl;
 }
 
@@ -122,8 +99,8 @@ table.r td, table.r th {
 }
 
 table.l td, table.l th, h3 {
-  font-family: Nastaliq, Naskh, "Times New Roman",
-  DevanagariFont, "Bangla MN", "Tamil MN";
+  font-family: Gulzar, "Scheherazade New", "Times New Roman",
+  "Noto Serif Devanagari", "Bangla MN", "Tamil MN";
 }
 span#showIslamicInfo:lang(ur) {
   float: right;
@@ -131,14 +108,14 @@ span#showIslamicInfo:lang(ur) {
 :lang(ur) {
   direction: rtl;
   text-align: right;
-  font-family: Nastaliq, Naskh, "Times New Roman", serif;
+  font-family: Gulzar, "Scheherazade New", "Times New Roman", serif;
   word-spacing: 2px;
 }
 :lang(hi) {
-  font-family: DevanagariFont, "Devanagari MT", DevanagariSans, serif;
+  font-family: "Noto Serif Devanagari", "Devanagari MT", "Kohinoor Devanagari", "Nirmala UI", serif;
 }
 :lang(sa) {
-  font-family: "Devanagari MT", DevanagariFont, DevanagariSans, serif;
+  font-family: "Devanagari MT", "Noto Serif Devanagari", "Kohinoor Devanagari", "Nirmala UI", serif;
 }
 :lang(he) {
   direction: rtl;
@@ -148,18 +125,18 @@ span#showIslamicInfo:lang(ur) {
 :lang(fa),.naskh:lang(ur),:lang(ar) {
   direction: rtl;
   text-align: right;
-  font-family: Naskh, "Times New Roman", serif;
+  font-family: "Scheherazade New", "Times New Roman", serif;
 }
 p.reference {
   text-align: center;
   font-size: 12px;
 }
 p.reference span:lang(ar) {
-  font-family: "Diwan Thuluth", "Baghdad", Naskh, "Times New Roman", serif;
+  font-family: "Diwan Thuluth", "Baghdad", "Scheherazade New", "Times New Roman", serif;
   font-size: 30px;
 }
 p.reference span:lang(sa) {
-  font-family: "Devanagari MT", DevanagariFont, serif;
+  font-family: "Devanagari MT", "Noto Serif Devanagari", serif;
 }
 span.noItalics {
   font-style: normal;
@@ -175,7 +152,7 @@ button:lang(ur) {
   font-family: "Times New Roman", serif;
 }
 button:lang(hi),input:lang(hi),select:lang(hi) {
-  font-family: DevanagariSans, sans-serif;
+  font-family: "Kohinoor Devanagari", "Nirmala UI", sans-serif;
 }
 button:active {
   background-color: #3366FF;
