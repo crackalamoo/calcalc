@@ -148,9 +148,6 @@ button {
   border-radius: 5px;
   font-family: system-ui, sans-serif;
 }
-button:lang(ur) {
-  font-family: "Times New Roman", serif;
-}
 button:lang(hi),input:lang(hi),select:lang(hi) {
   font-family: "Kohinoor Devanagari", "Nirmala UI", sans-serif;
 }

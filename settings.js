@@ -171,7 +171,10 @@ function changeLanguage2(l=null, start=false) {
   document.islamic.prayer.style.direction = lang2Data.dir;
   document.islamic.prayer.style.fontFamily = lang2Data.font2;
   document.islamic.style.direction = lang2Data.dir;
+  document.islamic.calculation.style.direction = lang2Data.dir;
   document.islamic.calculation.style.fontFamily = lang2Data.font2;
+  document.islamic.asr.style.direction = lang2Data.dir;
+  document.islamic.asr.style.fontFamily = lang2Data.font2;
   try {
     localStorage.setItem("language2", language2);
   } catch(err) {}
