@@ -6,6 +6,9 @@ function lang3_hi() {
   lang3Data.indian = "भारतीय राष्ट्रीय पंचांग";
   lang3Data.date = "तारीख़";
   lang3Data.weekday = "हफ़्ते का दिन";
+  lang3Data.tithi = "तिथि";
+  lang3Data.kshaya = "क्षय";
+  lang3Data.vriddhi = "वृद्धि";
   lang3Data.weekdays = new Array(
       "रविवार", "सोमवार", "मंगलवार", "बुधवार",
       "गुरुवार", "शुक्रवार", "शनिवार");
@@ -44,6 +47,9 @@ function lang3_ur() {
   lang3Data.indian = "بھارتی قومی تقویم";
   lang3Data.date = "تاریخ";
   lang3Data.weekday = "ہفتے کا دن";
+  lang3Data.tithi = "تتھی";
+  lang3Data.kshaya = "کشے";
+  lang3Data.vriddhi = "ورِدھی";
   lang3Data.weekdays = new Array("اتوار",
                                "سوموار",
                                "منگل",
@@ -102,6 +108,9 @@ function lang3_pa_pk() {
   lang3Data.indian = "بھارتی قومی تقویم";
   lang3Data.date = "تاریخ";
   lang3Data.weekday = "ہفتے دا دن";
+  lang3Data.tithi = "تتھ";
+  lang3Data.kshaya = "کھَے";
+  lang3Data.vriddhi = "ورِدھی";
   lang3Data.weekdays = new Array("اتوار",
                                "پیر",
                                "منگل",
@@ -158,6 +167,9 @@ function lang3_pa_in() {
   lang3Data.indian = "ਭਾਰਤੀ ਰਾਸ਼ਟਰੀ ਕੈਲੰਡਰ";
   lang3Data.date = "ਤਾਰੀਖ਼";
   lang3Data.weekday = "ਹਫ਼ਤੇ ਦਾ ਦਿਨ";
+  lang3Data.tithi = "ਤਿਥ";
+  lang3Data.kshaya = "ਖੈ";
+  lang3Data.vriddhi = "ਵ੍ਰਿਧੀ";
   lang3Data.weekdays = new Array(
       "ਐਤਵਾਰ", "ਸੋਮਵਾਰ", "ਮੰਗਲਵਾਰ", "ਬੁੱਧਵਾਰ",
       "ਵੀਰਵਾਰ", "ਸ਼ੁੱਕਰਵਾਰ", "ਸ਼ਨੀਵਾਰ");
@@ -195,6 +207,9 @@ function lang3_sa() {
   lang3Data.indian = "भारतस्य राष्ट्रियपञ्चाङ्गम्";
   lang3Data.date = "तिथिः";
   lang3Data.weekday = "वासरः";
+  lang3Data.tithi = "तिथिः";
+  lang3Data.kshaya = "क्षयः";
+  lang3Data.vriddhi = "वृद्धिः";
   lang3Data.weekdays = new Array(
       "भानुवासरम्", "इन्दुवासरम्", "भौमवासरम्", "सौम्यवासरम्",
       "गुरुवासरम्", "भृगुवासरम्", "स्थिरवासरम्");
@@ -234,6 +249,9 @@ function lang3_mr() {
   lang3Data.indian = "भारतीय राष्ट्रीय दिनदर्शिका";
   lang3Data.date = "तारीख";
   lang3Data.weekday = "आठवड्याचा दिवस";
+  lang3Data.tithi = "तिथी";
+  lang3Data.kshaya = "क्षय";
+  lang3Data.vriddhi = "वृद्धी";
   lang3Data.weekdays = new Array(
       "रविवार", "सोमवार", "मंगळवार", "बुधवार",
       "गुरुवार", "शुक्रवार", "शनिवार");
@@ -272,6 +290,9 @@ function lang3_ta() {
   lang3Data.indian = "இந்தியத் தேசிய நாட்காட்டி";
   lang3Data.date = "தேதி";
   lang3Data.weekday = "வாரம் நாள்";
+  lang3Data.tithi = "திதி";
+  lang3Data.kshaya = "க்ஷயம்";
+  lang3Data.vriddhi = "விருத்தி";
   lang3Data.weekdays = new Array(
       "ஞாயிற்றுக்கிழமை", "திங்கட்கிழமை", "செவ்வாய்க்கிழமை", "புதன்கிழமை",
       "வியாழக்கிழமை", "வெள்ளிக்கிழமை", "சனிக்கிழமை");
@@ -310,6 +331,9 @@ function lang3_bn() {
   lang3Data.indian = "ভারতীয় রাষ্ট্রীয় শকাব্দ";
   lang3Data.date = "তারিখ";
   lang3Data.weekday = "সপ্তাহের দিন";
+  lang3Data.tithi = "তিথি";
+  lang3Data.kshaya = "ক্ষয়";
+  lang3Data.vriddhi = "বৃদ্ধি";
   lang3Data.weekdays = new Array(
       "রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার",
       "বৃহস্পতিবার", "সুক্রবার", "শনিবার");
@@ -348,6 +372,9 @@ function lang3_en() {
   lang3Data.indian = "Indian National Calendar";
   lang3Data.date = "Date";
   lang3Data.weekday = "Weekday";
+  lang3Data.tithi = "Tithi";
+  lang3Data.kshaya = "Kshaya";
+  lang3Data.vriddhi = "Vriddhi";
   lang3Data.weekdays = new Array(
       "Ravivara", "Somavara", "Mangalavara", "Budhavara",
       "Guruvara", "Shukravara", "Shanivara");
@@ -391,6 +418,9 @@ function lang3_gu() {
   lang3Data.indian = "ભારતીય રાષ્ટ્રીય પંચાંગ";
   lang3Data.date = "તારીખ";
   lang3Data.weekday = "અઠવાડિયાનો દિવસ";
+  lang3Data.tithi = "તિથિ";
+  lang3Data.kshaya = "ક્ષય";
+  lang3Data.vriddhi = "વૃદ્ધિ";
   lang3Data.weekdays = new Array(
       "રવિવાર", "સોમવાર", "મંગળવાર", "બુધવાર",
       "ગુરુવાર", "શુક્રવાર", "શનિવાર");

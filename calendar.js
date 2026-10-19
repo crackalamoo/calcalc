@@ -861,97 +861,124 @@ function isHinduGuessCorrect(originalDate, jd) {
     && originalDate[2] == hinduDate[2]);
 }
 
-// HINDU_TO_JD -- Determine Julian day from Hindu date
+// HINDU_TO_JD -- Determine Julian day when a Hindu date (tithi) begins
 
 function hindu_to_jd(year, month, day, adhik) {
-  let gregorianYear = year + HINDU_OFFSET;
-  if (month < HINDU_MONTH1+1) year++ // Convert to Vikram
-  while (day > 30) {
-    day -= 30;
-    month++;
-    if (month > 12) {
-      month -= 12;
-      year++;
+  let extra = 0;
+  if (day > 30) { extra = day - 30; day = 30; }
+  if (day < 1) { extra = day - 1; day = 1; }
+
+  // First half of a purnimanta month is in the amanta month before
+  let amantaMonth = month, amantaDay = day, chaitraYear = year;
+  if (POONAM) {
+    amantaDay = (day <= 15) ? day + 15 : day - 15;
+    if (day <= 15) amantaMonth--;
+    if (amantaMonth < 1) {
+      amantaMonth += 12;
+      chaitraYear--;
     }
   }
-  while (day < 1) {
-    day += 30;
-    month--;
-    if (month < 1) {
-      month += 12;
-      year--;
+  if (amantaMonth < HINDU_MONTH1+1) chaitraYear++; // Convert to Vikram
+
+  let estimate = gregorian_to_jd(chaitraYear + HINDU_OFFSET, 3, 25) +
+    (amantaMonth - 1)*SynodicMonth + (amantaDay - 1)*SynodicMonth/30.0;
+  let index = amantaDay - 1;
+
+  // Check nearby months, then a year either side
+  let fallback = null;
+  for (let k of [0, -1, 1, -2, 2, -12, 12, -13, 13]) {
+    let jd = tithi_near(estimate + k*SynodicMonth, index);
+    let date = jd_to_hindu(jd);
+    if (date[0] != year || date[1] != month || date[2] != day) continue;
+    if ((date[3] == 1) == adhik) {
+      fallback = jd;
+      break;
     }
+    if (fallback == null) fallback = jd; // No adhik month
   }
-  var originalDate = new Array(year, month, day, adhik);
-  jd = gregorian_to_jd(gregorianYear, 3 + month, 21 + day);
-  let monthShift = 25.0;
-  while (jd_to_hindu(jd, true)[0] != year || jd_to_hindu(jd, true)[1] != month) {
-    if (jd_to_hindu(jd, true)[0] < year) jd += 5*SynodicMonth;
-    if (jd_to_hindu(jd, true)[0] > year) jd -= 5*SynodicMonth;
-    if (jd_to_hindu(jd, true)[0] == year) {
-      if (jd_to_hindu(jd, true)[1] < month) {
-        jd += monthShift;
-        monthShift -= 0.5;
-      }
-      if (jd_to_hindu(jd, true)[1] > month ||
-          (jd_to_hindu(jd, true)[1] == month && adhik && jd_to_hindu(jd, true)[3] == 2)) {
-        jd -= monthShift
-        monthShift -= 0.5;
-      }
-      if (monthShift < 0.9) {
-        monthShift = 20;
-        month++;
-        originalDate[1]++;
-        originalDate[3] = true;
-        adhik = true;
-      }
-    }
-  }
-  while (jd_to_hindu(jd, true)[2] < originalDate[2]) jd += (SynodicMonth/60.0);
-  while (jd_to_hindu(jd, true)[2] > originalDate[2]) jd -= (SynodicMonth/60.0);
-  if (adhik && jd_to_hindu(jd, true)[3] == 2) jd -= SynodicMonth;
-  else if (!adhik && jd_to_hindu(jd, true)[3] == 1) jd += SynodicMonth;
-  if (originalDate[1] == 1 && jd_to_hindu(jd, true)[1] == 12) {
-    jd += 20;
-    while (jd_to_hindu(jd, true)[2] < originalDate[2]) jd += (SynodicMonth/60.0);
-    while (jd_to_hindu(jd, true)[2] > originalDate[2]) jd -= (SynodicMonth/60.0);
-  }
-  jd = Math.round(jd * 24)/24;
-  if (originalDate[1] < 1) originalDate[1] += 12;
-  while (jd_to_hindu(jd, true)[2] != originalDate[2] || jd_to_hindu(jd, true)[1] != originalDate[1]) {
-    let currentDate = jd_to_hindu(jd, true);
-    let currentTithi = currentDate[2];
-    let currentMonth = currentDate[1];
-    if (currentMonth < 1) currentMonth += 12;
-    if (currentTithi < originalDate[2]) jd += (1/24.0);
-    if (currentTithi > originalDate[2]) jd -= (1/24.0);
-    if (currentMonth < originalDate[1]) jd += 24;
-    else if (currentMonth > originalDate[1]) jd -= 24;
-  }
-  while (jd_to_hindu(jd)[2] == originalDate[2])
-    jd -= (1/24.0);
-  return jd + (1/24.0);
+  if (fallback == null) fallback = tithi_near(estimate, index);
+  if (extra != 0) fallback = tithi_near(fallback + extra*SynodicMonth/30.0, mod(index + extra, 30));
+  return tithi_boundary(fallback, -1);
 }
+
+// TITHI_NEAR -- Middle of the nearest tithi with a given number
+
+function tithi_near(jd, index) {
+  for (let i = 0; i < 6; i++) {
+    let delta = mod(index + 0.5 - hindu_tithi(jd) + 15, 30) - 15;
+    jd += delta*SynodicMonth/30.0;
+  }
+  return jd;
+}
+
+// DIVASA_TO_JD -- Determine Julian day of the sunrise in a tithi (divasa)
 
 function divasa_to_jd(year, month, day, adhik)
 {
-  var jd = hindu_to_jd(year, month, day, adhik);
+  var start = hindu_to_jd(year, month, day, adhik);
+  var end = tithi_boundary(start, 1);
+  var sunrise = hindu_day_start(start);
+  if (sunrise < start) sunrise = hindu_sunrise(sunrise + 1);
+  if (sunrise >= end) sunrise = hindu_day_start(start); // Kshaya tithi
+  return sunrise + 1/86400.0; // extra second so it will be after sunrise
+}
+
+// HINDU_SUNRISE -- Sunrise on the day containing jd
+
+function hindu_sunrise(jd)
+{
+  var midnight = Math.floor(jd-0.5)+0.5;
+  var sunrise = sunTimes_jd(midnight, 0, true);
+  if (isNaN(sunrise))
+    sunrise = 0.25; // No sunrise: use 6:00
+  return midnight + sunrise;
+}
+
+// HINDU_DAY_START -- Sunrise that begins the Hindu day (vara) containing jd
+
+var SUNRISE_TOLERANCE = 2/86400.0;
+
+function hindu_day_start(jd)
+{
+  var sunrise = hindu_sunrise(jd);
+  if (jd < sunrise - SUNRISE_TOLERANCE)
+    sunrise = hindu_sunrise(jd - 1);
+  return sunrise;
+}
+
+// HINDU_TITHI -- Tithi at a Julian day for the Hindu calendar's location
+
+function hindu_tithi(jd)
+{
+  FORCE_INDIA = document.hinducalendar.india.checked;
+  var t = tithi(jd);
   FORCE_INDIA = false;
-  var sunrise = sunTimes_jd(jd, 0, false);
-  if (isNaN(sunrise))
-    sunrise = 1.1;
-  if (mod(jd+0.5,1.0) > sunrise) {
-    jd++;
-    sunrise = sunTimes_jd(jd, 0, false);
+  return t;
+}
+
+// TITHI_INDEX -- Number of the tithi (0 to 29) at a Julian day
+
+function tithi_index(jd)
+{
+  return Math.floor(hindu_tithi(jd));
+}
+
+// TITHI_BOUNDARY -- Start (direction -1) or end (direction 1) of the tithi containing jd
+
+function tithi_boundary(jd, direction)
+{
+  var index = tithi_index(jd);
+  var inside = jd, outside = jd;
+  for (var i = 0; i < 30 && tithi_index(outside) == index; i++) {
+    inside = outside;
+    outside += direction/24.0;
   }
-  var indiaJd = Math.floor(jd+0.5)-0.5+sunTimes_jd(jd, 0, true);
-  if (jd_to_hindu(indiaJd)[2] == day+1 || (day == 30 && jd_to_hindu(indiaJd)[2] == 1)) {
-    jd--;
-    sunrise = sunTimes_jd(jd, 0, false);
+  for (var i = 0; i < 12; i++) {
+    var mid = (inside + outside)/2.0;
+    if (tithi_index(mid) == index) inside = mid;
+    else outside = mid;
   }
-  if (isNaN(sunrise))
-    sunrise = 0.0;
-  return Math.floor(jd-0.5)+0.5+(1/100000.0)+sunrise; // extra second so it will be after sunrise
+  return (direction < 0) ? inside : outside;
 }
 
 var HINDU_OFFSET = -57;
@@ -1863,7 +1890,8 @@ function updateFromGregorian()
 
     // Update Hindu Calendar
 
-    hinducal = jd_to_hindu(j_real);
+    j2 = hindu_day_start(j_real);
+    hinducal = jd_to_hindu(j2);
     document.hinducalendar.year.value = hinducal[0];
     document.hinducalendar.month.value = hinducal[1];
     document.hinducalendar.day.value = hinducal[2];
@@ -1878,15 +1906,10 @@ function updateFromGregorian()
       document.hinducalendar.monthType.selectedIndex = 0;
       document.hinducalendar.monthType.style.display = "none";
     }
-    j2 = j_real;
-    if (!isNaN(sunTimes_jd(j, 0, false))) {
-      if (mod(j2+0.5,1.0) < sunTimes_jd(j, 0, false)) j2--;
-    }
-    j2 = Math.floor(j2-0.5)+0.5+sunTimes_jd(j2, 0, true);
-    hinducal = jd_to_hindu(j2);
     document.hinducalendar.weekday.value = lang3Data.weekdays[jwday(j2)];
     document.hinducalendar.solarDay.value = lang3Data.months[hinducal[1] - 1] + " " +
       hinduDayName(hinducal[2], POONAM ? true : false);
+    updateTithi(j_real, j2);
     zodiac = getZodiac(j_real, false);
     document.hinducalendar.zodiac.value = lang3Data.zodiac[zodiac - 1] + " (" + Math.floor(sunpos(j_real)[12]) + "°)";
     document.hinducalendar.ayanamsha.value = Math.round(sunpos(j_real)[15]*1000.0)/1000.0 + "°";
@@ -2114,21 +2137,63 @@ function calcIslamic()
                            (new Number(document.islamic.day.value))));
 }
 
-function calcHindu()
+//  updateTithi  --  Update tithi, its times, and vriddhi/kshaya notes
+
+function updateTithi(jd, sunrise)
 {
-    let monthType = document.hinducalendar.monthType;
-    setJulian(hindu_to_jd(new Number(document.hinducalendar.year.value),
-                    new Number(document.hinducalendar.month.value),
-                    new Number(document.hinducalendar.day.value),
-                    (monthType.selectedIndex == 0 && monthType.style.display != "none") ));
+    let index = tithi_index(jd);
+    let start = tithi_boundary(jd, -1);
+    let end = tithi_boundary(jd, 1);
+    document.hinducalendar.tithi.value = hinduDayName(index + 1, false);
+    document.hinducalendar.tithiTimes.value = formatTithiTime(start) + " – " + formatTithiTime(end);
+
+    let dayStart = start, dayEnd = end;
+    if (tithi_index(sunrise) != index) {
+      dayStart = tithi_boundary(sunrise, -1);
+      dayEnd = tithi_boundary(sunrise, 1);
+    }
+    let nextSunrise = hindu_sunrise(sunrise + 1);
+    let notes = [];
+    if (dayStart < hindu_sunrise(sunrise - 1))
+      notes.push(lang3Data.vriddhi + " 2/2");
+    else if (dayEnd > nextSunrise)
+      notes.push(lang3Data.vriddhi + " 1/2");
+    if (dayEnd < nextSunrise && tithi_boundary(dayEnd, 1) < nextSunrise)
+      notes.push(lang3Data.kshaya + ": " + hinduDayName(tithi_index(dayEnd) + 1, false));
+    document.hinducalendar.tithiNote.value = notes.join(", ");
+    document.hinducalendar.tithiNote.style.display = notes.length ? "inline-block" : "none";
 }
-function calcHinduDivasa()
+
+//  formatTithiTime  --  Format weekday and time of a Julian day
+
+function formatTithiTime(jd)
+{
+    jd += 30/86400.0; // Round to the minute
+    let time = jhms(jd);
+    return Weekdays[jwday(jd)] + " " + pad(time[0], 2, "0") + ":" + pad(time[1], 2, "0");
+}
+
+//  calcHindu  --  Update from Hindu calendar
+
+function calcHindu()
 {
     let monthType = document.hinducalendar.monthType;
     setJulian(divasa_to_jd(new Number(document.hinducalendar.year.value),
                     new Number(document.hinducalendar.month.value),
                     new Number(document.hinducalendar.day.value),
                     (monthType.selectedIndex == 0 && monthType.style.display != "none") ));
+}
+
+//  calcHinduTithiStart  --  Update to start of Hindu tithi
+
+function calcHinduTithiStart()
+{
+    let monthType = document.hinducalendar.monthType;
+    setJulian(hindu_to_jd(new Number(document.hinducalendar.year.value),
+                    new Number(document.hinducalendar.month.value),
+                    new Number(document.hinducalendar.day.value),
+                    (monthType.selectedIndex == 0 && monthType.style.display != "none") )
+              + 1/86400.0); // extra second so it will be inside the tithi
 }
 
 //  calcPersian  --  Update from Persian calendar

@@ -805,6 +805,16 @@ the crescent of the new Moon.
 </td>
 </tr>
 <tr>
+<th id="hinduTithi">
+तिथि
+</th>
+<td align="center">
+    <input type="text" name="tithi" value="" size="18" class="ctr" readonly="readonly" /><br>
+    <input type="text" name="tithiTimes" value="" size="28" class="ctr" readonly="readonly" /><br>
+    <input type="text" name="tithiNote" value="" size="28" class="ctr" readonly="readonly" style="display: none;" />
+</td>
+</tr>
+<tr>
   <th id="zodiacSign"></th>
   <td align="center">
     <input type="text" name="zodiac" value="" size="18" class="ctr" readonly="readonly" /><br>
@@ -826,8 +836,8 @@ the crescent of the new Moon.
 
 <tr>
 <td colspan="2" align="center">
-<button onclick="calcHindu();">Calculate (Tithi)</button>
-<button onclick="calcHinduDivasa();">Calculate (Divasa)</button>
+<button onclick="calcHindu();">Calculate</button><br>
+<button onclick="calcHinduTithiStart();">Go to tithi start</button>
 </td>
 </tr>
 </table>
@@ -911,12 +921,20 @@ the crescent of the new Moon.
   </tr>
   </tbody></table>
   <p>
-  The dates in the boxes here are called <i>tithis</i>. This is a lunar day. In one cycle of
+  The dates of this calendar are named after <i>tithis</i>. A tithi is a lunar day. In one cycle of
   the moon there are 30 tithis, but this is separate from our days: they don't
   start at midnight or any one specific time. For this reason, the name of the tithi
   it was at sunrise is taken as the <i>divasa</i> for everyday life.
+  Like the weekday (<i>vara</i>), the divasa lasts from one sunrise to the next.
+  </p>
+  <p>
   A tithi is slightly shorter than a day because one cycle of the
-  moon is about 29.5 days, but 30 tithis.
+  moon is about 29.5 days, but 30 tithis. The moon's speed also varies, so a tithi
+  can last anywhere from about 20 to 27 hours. When a tithi begins and ends
+  between two sunrises, no day is named after it (<i>kshaya</i>), and when
+  a tithi lasts through two sunrises, two days in a row have the same name (<i>vriddhi</i>).
+  </p>
+  <p>
   There are two <i>paksha</i>s (fortnights) in a month. Unless it is <i>amavasya</i> or
   <i>poornima</i>, the name of the fortnight must be specified to know whether the moon is waxing (<i>shukla paksha</i>)
   or waning (<i>krishna paksha</i>). For example, if it is three days after Amavasya,
@@ -954,10 +972,19 @@ the crescent of the new Moon.
 देसी किसान और अलग-अलग भारतीय धर्मों के लोग इस पंचांग का इस्तेमाल करते हैं।
 </p>
 <p>
-यहाँ के बक्सों के तारीख़ों को &ldquo;तिथि&rdquo; कहते है। ये चांद का दिन है। चांद के एक गोल में 30 तिथियाँ हैं, मगर ये हमारे दिनों से
+इस पंचांग की तारीख़ें अपने नाम तिथियों से लेती हैं। तिथि चांद का दिन है। चांद के एक गोल में 30 तिथियाँ हैं, मगर ये हमारे दिनों से
 जुदा है: ना आधीरात को ना किसी एक घंटे को शुरू होते हैं। इसलिए जो तिथि थी जब सूरज
-पिछली बार चढ़ गया, वो दिवस बन जाती है आम ज़िंदगी के लिए। एक तिथि हमारे दिन से थोड़ी छोटी है क्योंकि चांद के एक गोल में
-तक़रीबन 29.5 दिन हैं, मगर 30 तिथियाँ हैं। महीने में दो पक्ष या पाख होते हैं। अगर न पूनम न अमावस है, पाख का नाम
+पिछली बार चढ़ गया, वो दिवस बन जाती है आम ज़िंदगी के लिए। हफ़्ते के दिन (वार) की तरह,
+दिवस एक बार सूरज चढ़ने से अगली बार सूरज चढ़ने तक चलता है।
+</p>
+<p>
+एक तिथि हमारे दिन से थोड़ी छोटी है क्योंकि चांद के एक गोल में
+तक़रीबन 29.5 दिन हैं, मगर 30 तिथियाँ हैं। चांद की रफ़्तार भी बदलती रहती है, इसलिए एक तिथि तक़रीबन 20 से 27 घंटे
+की हो सकती है। जब कोई तिथि दो बार सूरज चढ़ने के बीच ही शुरू होकर ख़त्म हो जाती है, तो किसी दिन का नाम उस पर नहीं
+होता (&ldquo;क्षय&rdquo;), और जब कोई तिथि दो बार सूरज चढ़ने तक चलती है, तो लगातार दो दिनों का एक ही नाम होता है (&ldquo;वृद्धि&rdquo;)।
+</p>
+<p>
+महीने में दो पक्ष या पाख होते हैं। अगर न पूनम न अमावस है, पाख का नाम
 कहना है ताकि पता हो कि क्या चांद उतर रहा है (कृष्ण पक्ष/पाख) या बढ़ रहा है (शुक्ल पक्ष/पाख)।
 जैसे, अगर अमावस से तीन दिन बाद है तो दिन का नाम &ldquo;शुक्ल तीज&rdquo; होगा। अगर पूनम से तीन दिन बाद है तो
 दिन का नाम &ldquo;कृष्ण तीज&rdquo; होगा।
@@ -2435,8 +2462,7 @@ function makeMonthCalendar(month) {
         }
       } */
       if (calendar2 == "hindu") {
-        var j2 = jd;
-        j2 = Math.floor(jd-0.5)+0.5+sunTimes_jd(jd, 0, true);
+        var j2 = hindu_sunrise(jd);
         var date = jd_to_hindu(j2);
         var secondDayNum = date[2];
         var secondMonthName = lang3Data.months[date[1] - 1];

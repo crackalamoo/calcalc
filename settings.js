@@ -214,6 +214,8 @@ function changeLanguage3(l=null, start=false) {
   document.getElementById("hinduDate").style.fontFamily = lang3Data.font;
   document.getElementById("hinduWeekdays").innerHTML = lang3Data.weekday;
   document.getElementById("hinduWeekdays").style.fontFamily = lang3Data.font;
+  document.getElementById("hinduTithi").innerHTML = lang3Data.tithi;
+  document.getElementById("hinduTithi").style.fontFamily = lang3Data.font;
   document.getElementById("indianDate").innerHTML = lang3Data.date;
   document.getElementById("indianDate").style.fontFamily = lang3Data.font;
   document.getElementById("indianWeekdays").innerHTML = lang3Data.weekday;
@@ -249,6 +251,9 @@ function changeLanguage3(l=null, start=false) {
   document.hinducalendar.zodiac.style.direction = lang3Data.dir;
   document.hinducalendar.solarDay.style.fontFamily = lang3Data.font2;
   document.hinducalendar.weekday.style.fontFamily = lang3Data.font2;
+  document.hinducalendar.tithi.style.fontFamily = lang3Data.font2;
+  document.hinducalendar.tithiTimes.style.fontFamily = lang3Data.font2;
+  document.hinducalendar.tithiNote.style.fontFamily = lang3Data.font2;
   document.hinducalendar.ritu.style.fontFamily = lang3Data.font2;
   document.hinducalendar.prahar.style.fontFamily = lang3Data.font2;
   document.indiancivilcalendar.leap.style.fontFamily = lang3Data.font2;
