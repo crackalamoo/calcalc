@@ -31,7 +31,7 @@ function lang3_hi() {
     "वृश्चिक", "धनू", "मकर", "कुंभ", "मीन"];
   lang3Data.font = '"Noto Serif Devanagari", serif';
   lang3Data.font2 = '"Kohinoor Devanagari", "Nirmala UI", system-ui';
-  lang3Data.india = "भारत से?";
+  lang3Data.india = "भारत का समय";
   lang3Data.ayanamsha = "अयनांश";
   lang3Data.numberMap = "hi";
   lang3Data.seasons = ["बसंत", "गरमियाँ", "बरसात", "पतझड़", "सरदियाँ (हेमंत)", "सरदियाँ (शिशिर)"];
@@ -92,7 +92,7 @@ function lang3_ur() {
     "ورِشچِک", "دھَنُو", "مَکَر", "کُمبھ", "مِین"];
   lang3Data.font = 'Gulzar, serif';
   lang3Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
-  lang3Data.india = "بھارت سے؟";
+  lang3Data.india = "بھارت کا وقت";
   lang3Data.ayanamsha = "اینامش";
   lang3Data.numberMap = "ur";
   lang3Data.seasons = ["بسنت", "گرمیاں", "برسات", "پتجھڑ", "سردیاں (ہیمنت)", "سردیاں (شِشِر)"];
@@ -152,7 +152,7 @@ function lang3_pa_pk() {
     "ورِشچِک", "دھَنُو", "مَکَر", "کُمبھ", "مِین"];
   lang3Data.font = 'Gulzar, serif';
   lang3Data.font2 = '"Geeza Pro", "Traditional Arabic", "Times New Roman"';
-  lang3Data.india = "بھارت توں؟";
+  lang3Data.india = "بھارت دا ویلا";
   lang3Data.ayanamsha = "اینامش";
   lang3Data.numberMap = "ur";
   lang3Data.seasons = ["بسنت", "گرمی", "برسات", "پتجھڑ", "ہیمنت", "سردی"];
@@ -192,7 +192,7 @@ function lang3_pa_in() {
     "ਵ੍ਰਿਸ਼ਚਿਕ", "ਧਨੂ", "ਮਕਰ", "ਕੁੰਭ", "ਮੀਨ"];
   lang3Data.font = '"Gurmukhi MT", serif';
   lang3Data.font2 = '"Gurmukhi MN", serif';
-  lang3Data.india = "ਭਾਰਤ ਤੋਂ?";
+  lang3Data.india = "ਭਾਰਤ ਦਾ ਸਮਾਂ";
   lang3Data.ayanamsha = "ਅਯਨਾਂਸ਼";
   lang3Data.numberMap = null;
   lang3Data.seasons = ["ਬਸੰਤ", "ਗਰਮੀ", "ਬਰਸਾਤ", "ਪੱਤਝੜ", "ਹੇਮੰਤ", "ਸਰਦੀ"];
@@ -232,7 +232,7 @@ function lang3_sa() {
     "वृश्चिकः", "धनुः", "मकरः", "कुम्भः", "मीनः"];
   lang3Data.font = '"Noto Serif Devanagari", serif';
   lang3Data.font2 = '"Kohinoor Devanagari", "Nirmala UI", system-ui';
-  lang3Data.india = "भारतदेशात्?";
+  lang3Data.india = "भारतकालः";
   lang3Data.ayanamsha = "अयनांशः";
   lang3Data.numberMap = "hi";
   lang3Data.seasons = ["वसन्तः", "ग्रीष्मः", "वर्षा", "शरद्", "हेमन्तः", "शिशिरः"];
@@ -274,7 +274,7 @@ function lang3_mr() {
     "वृश्चिक", "धनू", "मकर", "कुंभ", "मीन"];
   lang3Data.font = '"ITF Devanagari Marathi", "Noto Serif Devanagari", serif';
   lang3Data.font2 = '"Kohinoor Devanagari", "Nirmala UI", system-ui';
-  lang3Data.india = "भारत हून?";
+  lang3Data.india = "भारतीय वेळ";
   lang3Data.ayanamsha = "अयनांश";
   lang3Data.numberMap = "hi";
   lang3Data.seasons = ["वसंत", "ग्रीष्म", "वर्षा", "शरद", "हेमंत", "शिशिर"];
@@ -315,7 +315,7 @@ function lang3_ta() {
     "விருச்சிகம்", "தனுசு", "மகரம்", "கும்பம்", "மீனம்"];
   lang3Data.font = '"Tamil MN", serif';
   lang3Data.font2 = '"Tamil Sangam MN", system-ui';
-  lang3Data.india = "இந்தியாவிலிருந்து?";
+  lang3Data.india = "இந்திய நேரம்";
   lang3Data.ayanamsha = "அயனாம்சம்";
   lang3Data.numberMap = null;
   lang3Data.seasons = ["இளவேனில்", "முதுவேனில்", "கார்", "குளிர்", "முன்பனி", "பின்பனி"];
@@ -356,7 +356,7 @@ function lang3_bn() {
     "বৃশ্চিক", "ধনু", "মকর", "কুম্ভ", "মীন"];
   lang3Data.font = '"Bangla MN", serif';
   lang3Data.font2 = '"Bangla Sangam MN", "Kohinoor Bangla", system-ui';
-  lang3Data.india = "ভারত থেকে?";
+  lang3Data.india = "ভারতের সময়";
   lang3Data.ayanamsha = "অয়নাংশ";
   lang3Data.numberMap = null;
   lang3Data.seasons = ["বসন্ত", "গ্রীষ্ম", "বর্ষা", "শরৎ", "হেমন্ত", "শীত"];
@@ -399,7 +399,7 @@ function lang3_en() {
     "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
   lang3Data.font = '"Times New Roman"';
   lang3Data.font2 = 'system-ui';
-  lang3Data.india = "From India?";
+  lang3Data.india = "India time";
   lang3Data.ayanamsha = "Ayanamsa";
   lang3Data.numberMap = null;
   lang3Data.seasons = ["Vasant (Spring)", "Grishma (Summer)", "Varsha (Monsoon)", "Sharad (Autumn)",
@@ -443,7 +443,7 @@ function lang3_gu() {
     "વૃશ્ચિક", "ધન", "મકર", "કુંભ", "મીન"];
   lang3Data.font = '"Gujarati MT", serif';
   lang3Data.font2 = '"Gujarati Sangam MN", system-ui';
-  lang3Data.india = "ભારત તરફથી?";
+  lang3Data.india = "ભારતનો સમય";
   lang3Data.ayanamsha = "અયનાંશ";
   lang3Data.numberMap = null;
   lang3Data.seasons = ["વસંત", "ઉનાળો", "વરસાદ", "પાનખર", "હેમંત", "શિયાળો"];

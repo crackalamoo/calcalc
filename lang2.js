@@ -36,7 +36,7 @@ function lang2_ur() {
   lang2Data.dir = "rtl";
   lang2Data.numberMap = "ur";
   lang2Data.yearMark = "هـ";
-  lang2Data.mecca = "مکّے سے؟";
+  lang2Data.mecca = "مکّے کا وقت";
   lang2Data.salah = "نماز";
   lang2Data.prayers = new Array("فجر",
     "ظہر",
@@ -86,7 +86,7 @@ function lang2_ar() {
   lang2Data.dir = "rtl";
   lang2Data.numberMap = "ar";
   lang2Data.yearMark = "هـ";
-  lang2Data.mecca = "في مكة؟";
+  lang2Data.mecca = "بتوقيت مكة";
   lang2Data.salah = "‏صلاة‎";
   lang2Data.prayers = new Array("فجر",
     "ظهر",
@@ -136,7 +136,7 @@ function lang2_en() {
   lang2Data.dir = "ltr";
   lang2Data.numberMap = null;
   lang2Data.yearMark = " A.H.";
-  lang2Data.mecca = "From Mecca?";
+  lang2Data.mecca = "Mecca time";
   lang2Data.salah = "‏Salah";
   lang2Data.prayers = new Array("Fajr",
     "Zuhr",
@@ -182,7 +182,7 @@ function lang2_hi() {
   lang2Data.dir = "ltr";
   lang2Data.numberMap = "hi";
   lang2Data.yearMark = " हिज्री";
-  lang2Data.mecca = "मक्के से?";
+  lang2Data.mecca = "मक्के का समय";
   lang2Data.salah = "‏नमाज़";
   lang2Data.prayers = new Array("फ़ज्र",
     "ज़ुहर",
@@ -231,7 +231,7 @@ function lang2_id() {
   lang2Data.dir = "ltr";
   lang2Data.numberMap = null;
   lang2Data.yearMark = " H";
-  lang2Data.mecca = "Di Mekah?";
+  lang2Data.mecca = "Waktu Mekah";
   lang2Data.salah = "‏Salat";
   lang2Data.prayers = new Array("Fajar",
     "Zuhur",
@@ -278,7 +278,7 @@ function lang2_fa() {
   lang2Data.dir = "rtl";
   lang2Data.numberMap = "ur";
   lang2Data.yearMark = " قمری";
-  lang2Data.mecca = "در مکه";
+  lang2Data.mecca = "به وقت مکه";
   lang2Data.salah = "نماز";
   lang2Data.prayers = new Array("فجر",
     "ظہر",

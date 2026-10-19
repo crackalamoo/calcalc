@@ -2170,7 +2170,7 @@ function formatTithiTime(jd)
 {
     jd += 30/86400.0; // Round to the minute
     let time = jhms(jd);
-    return Weekdays[jwday(jd)] + " " + pad(time[0], 2, "0") + ":" + pad(time[1], 2, "0");
+    return lang3Data.weekdays[jwday(jd)] + " " + pad(time[0], 2, "0") + ":" + pad(time[1], 2, "0");
 }
 
 //  calcHindu  --  Update from Hindu calendar
