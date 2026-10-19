@@ -255,7 +255,8 @@ function changeLanguage3(l=null, start=false) {
   document.hinducalendar.solarDay.style.fontFamily = lang3Data.font2;
   document.hinducalendar.weekday.style.fontFamily = lang3Data.font2;
   document.hinducalendar.tithi.style.fontFamily = lang3Data.font2;
-  document.hinducalendar.tithiTimes.style.fontFamily = lang3Data.font2;
+  document.hinducalendar.tithiStart.style.fontFamily = lang3Data.font2;
+  document.hinducalendar.tithiEnd.style.fontFamily = lang3Data.font2;
   document.hinducalendar.tithiNote.style.fontFamily = lang3Data.font2;
   document.hinducalendar.ritu.style.fontFamily = lang3Data.font2;
   document.hinducalendar.prahar.style.fontFamily = lang3Data.font2;

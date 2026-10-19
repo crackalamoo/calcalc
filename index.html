@@ -809,9 +809,11 @@ the crescent of the new Moon.
 तिथि
 </th>
 <td align="center">
-    <input type="text" name="tithi" value="" size="18" class="ctr" readonly="readonly" /><br>
-    <input type="text" name="tithiTimes" value="" size="28" class="ctr" readonly="readonly" /><br>
-    <input type="text" name="tithiNote" value="" size="28" class="ctr" readonly="readonly" style="display: none;" />
+    <input type="text" name="tithi" value="" size="28" class="ctr" readonly="readonly" /><br>
+    <input type="text" name="tithiStart" value="" size="28" class="ctr" readonly="readonly" /><br>
+    <input type="text" name="tithiEnd" value="" size="28" class="ctr" readonly="readonly" /><br>
+    <input type="text" name="tithiNote" value="" size="28" class="ctr" readonly="readonly" style="display: none; margin: 0 auto;" />
+    <div><button type="button" onclick="calcHinduTithiStart();">Go to tithi start</button></div>
 </td>
 </tr>
 <tr>
@@ -836,8 +838,7 @@ the crescent of the new Moon.
 
 <tr>
 <td colspan="2" align="center">
-<button onclick="calcHindu();">Calculate</button><br>
-<button onclick="calcHinduTithiStart();">Go to tithi start</button>
+<button onclick="calcHindu();">Calculate</button>
 </td>
 </tr>
 </table>

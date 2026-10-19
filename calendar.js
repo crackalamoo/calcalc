@@ -2145,7 +2145,8 @@ function updateTithi(jd, sunrise)
     let start = tithi_boundary(jd, -1);
     let end = tithi_boundary(jd, 1);
     document.hinducalendar.tithi.value = hinduDayName(index + 1, false);
-    document.hinducalendar.tithiTimes.value = formatTithiTime(start) + " – " + formatTithiTime(end);
+    document.hinducalendar.tithiStart.value = lang3Data.tithiFrom.replace("%s", formatTithiTime(start));
+    document.hinducalendar.tithiEnd.value = lang3Data.tithiUntil.replace("%s", formatTithiTime(end));
 
     let dayStart = start, dayEnd = end;
     if (tithi_index(sunrise) != index) {
@@ -2161,7 +2162,7 @@ function updateTithi(jd, sunrise)
     if (dayEnd < nextSunrise && tithi_boundary(dayEnd, 1) < nextSunrise)
       notes.push(lang3Data.kshaya + ": " + hinduDayName(tithi_index(dayEnd) + 1, false));
     document.hinducalendar.tithiNote.value = notes.join(", ");
-    document.hinducalendar.tithiNote.style.display = notes.length ? "inline-block" : "none";
+    document.hinducalendar.tithiNote.style.display = notes.length ? "block" : "none";
 }
 
 //  formatTithiTime  --  Format weekday and time of a Julian day

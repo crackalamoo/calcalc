@@ -9,6 +9,8 @@ function lang3_hi() {
   lang3Data.tithi = "तिथि";
   lang3Data.kshaya = "क्षय";
   lang3Data.vriddhi = "वृद्धि";
+  lang3Data.tithiFrom = "%s से";
+  lang3Data.tithiUntil = "%s तक";
   lang3Data.weekdays = new Array(
       "रविवार", "सोमवार", "मंगलवार", "बुधवार",
       "गुरुवार", "शुक्रवार", "शनिवार");
@@ -50,6 +52,8 @@ function lang3_ur() {
   lang3Data.tithi = "تتھی";
   lang3Data.kshaya = "کشے";
   lang3Data.vriddhi = "ورِدھی";
+  lang3Data.tithiFrom = "%s سے";
+  lang3Data.tithiUntil = "%s تک";
   lang3Data.weekdays = new Array("اتوار",
                                "سوموار",
                                "منگل",
@@ -111,6 +115,8 @@ function lang3_pa_pk() {
   lang3Data.tithi = "تتھ";
   lang3Data.kshaya = "کھَے";
   lang3Data.vriddhi = "ورِدھی";
+  lang3Data.tithiFrom = "%s توں";
+  lang3Data.tithiUntil = "%s تک";
   lang3Data.weekdays = new Array("اتوار",
                                "پیر",
                                "منگل",
@@ -170,6 +176,8 @@ function lang3_pa_in() {
   lang3Data.tithi = "ਤਿਥ";
   lang3Data.kshaya = "ਖੈ";
   lang3Data.vriddhi = "ਵ੍ਰਿਧੀ";
+  lang3Data.tithiFrom = "%s ਤੋਂ";
+  lang3Data.tithiUntil = "%s ਤੱਕ";
   lang3Data.weekdays = new Array(
       "ਐਤਵਾਰ", "ਸੋਮਵਾਰ", "ਮੰਗਲਵਾਰ", "ਬੁੱਧਵਾਰ",
       "ਵੀਰਵਾਰ", "ਸ਼ੁੱਕਰਵਾਰ", "ਸ਼ਨੀਵਾਰ");
@@ -210,6 +218,8 @@ function lang3_sa() {
   lang3Data.tithi = "तिथिः";
   lang3Data.kshaya = "क्षयः";
   lang3Data.vriddhi = "वृद्धिः";
+  lang3Data.tithiFrom = "%s आरभ्य";
+  lang3Data.tithiUntil = "%s पर्यन्तम्";
   lang3Data.weekdays = new Array(
       "भानुवासरम्", "इन्दुवासरम्", "भौमवासरम्", "सौम्यवासरम्",
       "गुरुवासरम्", "भृगुवासरम्", "स्थिरवासरम्");
@@ -252,6 +262,8 @@ function lang3_mr() {
   lang3Data.tithi = "तिथी";
   lang3Data.kshaya = "क्षय";
   lang3Data.vriddhi = "वृद्धी";
+  lang3Data.tithiFrom = "%s पासून";
+  lang3Data.tithiUntil = "%s पर्यंत";
   lang3Data.weekdays = new Array(
       "रविवार", "सोमवार", "मंगळवार", "बुधवार",
       "गुरुवार", "शुक्रवार", "शनिवार");
@@ -293,6 +305,8 @@ function lang3_ta() {
   lang3Data.tithi = "திதி";
   lang3Data.kshaya = "க்ஷயம்";
   lang3Data.vriddhi = "விருத்தி";
+  lang3Data.tithiFrom = "%s முதல்";
+  lang3Data.tithiUntil = "%s வரை";
   lang3Data.weekdays = new Array(
       "ஞாயிற்றுக்கிழமை", "திங்கட்கிழமை", "செவ்வாய்க்கிழமை", "புதன்கிழமை",
       "வியாழக்கிழமை", "வெள்ளிக்கிழமை", "சனிக்கிழமை");
@@ -334,6 +348,8 @@ function lang3_bn() {
   lang3Data.tithi = "তিথি";
   lang3Data.kshaya = "ক্ষয়";
   lang3Data.vriddhi = "বৃদ্ধি";
+  lang3Data.tithiFrom = "%s থেকে";
+  lang3Data.tithiUntil = "%s পর্যন্ত";
   lang3Data.weekdays = new Array(
       "রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার",
       "বৃহস্পতিবার", "সুক্রবার", "শনিবার");
@@ -375,6 +391,8 @@ function lang3_en() {
   lang3Data.tithi = "Tithi";
   lang3Data.kshaya = "Kshaya";
   lang3Data.vriddhi = "Vriddhi";
+  lang3Data.tithiFrom = "From %s";
+  lang3Data.tithiUntil = "Until %s";
   lang3Data.weekdays = new Array(
       "Ravivara", "Somavara", "Mangalavara", "Budhavara",
       "Guruvara", "Shukravara", "Shanivara");
@@ -421,6 +439,8 @@ function lang3_gu() {
   lang3Data.tithi = "તિથિ";
   lang3Data.kshaya = "ક્ષય";
   lang3Data.vriddhi = "વૃદ્ધિ";
+  lang3Data.tithiFrom = "%s થી";
+  lang3Data.tithiUntil = "%s સુધી";
   lang3Data.weekdays = new Array(
       "રવિવાર", "સોમવાર", "મંગળવાર", "બુધવાર",
       "ગુરુવાર", "શુક્રવાર", "શનિવાર");
