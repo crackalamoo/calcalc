@@ -2511,23 +2511,8 @@ function makeMonthCalendar(month) {
       if (document.calendarMaker.jewish.checked) {
         dayHolidays = dayHolidays.concat(hebrewHolidays(jd_to_hebrew(jd), longPeriods));
       }
-      if (document.calendarMaker.hindu.checked) {
-        // Get holidays for multiple tithis on the same Gregorian date
-        FORCE_INDIA = document.hinducalendar.india.checked;
-        if (!isNaN(sunTimes_jd(jd, 0, true))) {
-          let jd2 = jd + sunTimes_jd(jd, 0, true);
-          let hinducal2 = jd_to_hindu(jd2);
-          let hinducal3 = jd_to_hindu(jd+1+sunTimes_jd(jd+1, 0, true));
-          dayHolidays = dayHolidays.concat(hinduHolidays(hinducal2, jd2, longPeriods));
-          if (hinducal2[2] != hinducal3[2]-1 && hinducal2[2] != hinducal3[2] && hinducal2[2] != 30)
-            dayHolidays = dayHolidays.concat(hinduHolidays(jd_to_hindu(jd+0.8), jd+0.8, longPeriods));
-        } else {
-          dayHolidays = dayHolidays.concat(hinduHolidays(jd_to_hindu(jd), jd, longPeriods));
-          dayHolidays = dayHolidays.concat(hinduHolidays(jd_to_hindu(jd+0.5), jd+0.5, longPeriods));
-          dayHolidays = dayHolidays.concat(hinduHolidays(jd_to_hindu(jd+1), jd+1, longPeriods));
-        }
-        FORCE_INDIA = false;
-      }
+      if (document.calendarMaker.hindu.checked)
+        dayHolidays = dayHolidays.concat(hinduHolidays(jd, longPeriods));
       if (document.calendarMaker.julian.checked)
         dayHolidays = dayHolidays.concat(julianHolidays(jd_to_julian(jd)));
       /* if (document.calendarMaker.chinese.checked)

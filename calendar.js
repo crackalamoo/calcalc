@@ -54,9 +54,9 @@ const HOLIDAYS_ISLAMIC = {"10,1": [["Eid al-Fitr", "Chaand Raat"], [1, 600]], "1
   "12,10": [["Eid al-Adha"], [1]], "9,1": [["Start of Ramadan"], [-12]],
   "12,8": [["Start of Hajj"], [10]]};
 const HOLIDAYS_HINDU = {"12,16": [["Holi"], [1867205]],
-  "6,4": [["Ganesh Chaturthi"], [2344893]], "5,23": [["Krishna Janmashtami"], [1173245]], "11,28": [["Maha Shivaratri"], [1994991]],
+  "5,23": [["Krishna Janmashtami"], [1173245]], "11,29": [["Maha Shivaratri"], [1994991]],
   "2,15": [["Buddha Purnima"], [1515428]], "5,15": [["Raksha Bandhan"], [1867156]], "7,10": [["Dussehra"], [1447493]],
-  "11,5": [["Basant Panchami"]], "10,15": [["Thaipoosam"], [1976806]], "12,20": [["Rang Panchami"], [1867205]],
+  "11,5": [["Basant Panchami"]], "12,20": [["Rang Panchami"], [1867205]],
   "1,1": [["Gudi Padwa", "Cheti Chand", "Ugadi"], [1484017, 2088935, 1173245]], "3,15": [["Vat Purnima"], [1173245]], "4,2": [["Ratha Jatra"], [2250738]],
   "7,1": [["Start of Navratri"], [2122900]], "5,5": [["Naga Panchami"], [1447493]], "1,9": [["Rama Navami"], [1484017]],
   "7,15": [["Valmiki Jayanti"], [1484017]], "12,17": [["Hola Mohalla"], [2342402]], "11,15": [["Magha Puja", "Guru Ravidas Jayanti"], [2415020, 2280232]],
@@ -64,7 +64,10 @@ const HOLIDAYS_HINDU = {"12,16": [["Holi"], [1867205]],
   "12,15": [["Holika Dahan", "Chhoti Holi"], [1867205, 1867205]], "1,13": [["Mahavir Jayanti"], [1502693]], "7,19": [["Karva Chauth"]],
   "8,6": [["Chhath"]], "4,15": [["Asalha Puja", "Guru Purnima"], [1575359]], "9,11": [["Gita Jayanti"]],
   "10,7": [["Guru Gobind Singh Jayanti"], [2329462]], "2,3": [["Akha Teej"]], "1,6": [["Yamuna Chhath"]],
-  "1,15": [["Hanuman Jayanti"], [1484017]], "9,15": [["Datta Jayanti"], [2232672]], "6,5": [["Samvatsari"], [1503693]]
+  "1,15": [["Hanuman Jayanti"], [1484017]], "9,15": [["Datta Jayanti"], [2232672]], "6,4": [["Ganesh Chaturthi", "Samvatsari"], [2344893, 1503693]],
+  "7,28": [["Dhanteras"], [2086302]], "7,29": [["Choti Diwali", "Naraka Chaturdashi"], [2086302, 2086302]],
+  "7,30": [["Diwali", "Lakshmi Puja", "Kali Puja"], [2086302, 2086302, 2378496]], "8,1": [["Govardhan Puja"], [2086302]],
+  "8,2": [["Bhai Dooj"], [2086302]]
 };
 const HOLIDAYS_HEBREW = {"7,1": ["Rosh Hashanah"], "7,10": ["Yom Kippur"],
   "9,25": ["Start of Hanukkah"], "1,15": ["Start of Passover"],
@@ -160,92 +163,207 @@ function islamicHolidays(islcal, longPeriods=true) {
   return holidays;
 }
 
-var hinduDiwali = {};
+// Part of the day each festival's tithi must cover, if not sunrise. With "+", the next day is
+// taken instead if the tithi covers a muhurta of its window (or all of a shorter window). With
+// "-", the first day the tithi touches the window is taken.
+const HINDU_FESTIVAL_TIMES = {"Dussehra": "aparahna", "Rama Navami": "madhyahna", "Ganesh Chaturthi": "madhyahna",
+  "Krishna Janmashtami": "nishita+", "Maha Shivaratri": "nishita+", "Kali Puja": "nishita+",
+  "Diwali": "pradosh+", "Lakshmi Puja": "pradosh+", "Dhanteras": "pradosh", "Choti Diwali": "pradosh",
+  "Naraka Chaturdashi": "arunodaya+", "Bhai Dooj": "aparahna", "Govardhan Puja": "madhyahna",
+  "Basant Panchami": "purvahna", "Akha Teej": "purvahna", "Vat Purnima": "madhyahna-",
+  "Datta Jayanti": "pradosh", "Gita Jayanti": "purvahna"};
 
-function hinduHolidays(hinducal, j, longPeriods=true) {
-  var shiftBack = false;
-  var shiftDate = -1;
-  var holidays = [];
-  FORCE_INDIA = document.hinducalendar.india.checked;
-  if (j >= 2086302 && (hinducal[1] == 7 || hinducal[1] == 8) && hinducal[3] != 1) {
-    let diwaliDays = [];
-    let diwaliDates = [[7,28], [7,29], [7,30], [8,1], [8,2]];
-    let wrongDiwali = [[7,29], [7,30], [8,1], [8,2], [8,3]];
-    if (POONAM) {
-      diwaliDates = [[8,13], [8,14], [8,15], [8,16], [8,17]];
-      wrongDiwali = [[8,14], [8,15], [8,16], [8,17], [8,18]];
+// HINDU_FESTIVAL_WINDOW -- Start and end of the part of a civil day a festival is observed in
+
+function hindu_festival_window(day, time) {
+  let sunrise = hindu_sunrise(day), nextSunrise = hindu_sunrise(day + 1);
+  let sunset = day + sunTimes_jd(day, 1, true);
+  if (isNaN(sunset)) sunset = day + 0.75; // No sunset: use 18:00
+  let part = (sunset - sunrise)/5.0, muhurta = (nextSunrise - sunset)/15.0;
+  let lastMuhurta = (sunrise - (day - 1 + sunTimes_jd(day - 1, 1, true)))/15.0; // Of the night before
+  if (time == "purvahna") return [sunrise, sunrise + 2.5*part];
+  if (time == "madhyahna") return [sunrise + 2*part, sunrise + 3*part];
+  if (time == "aparahna") return [sunrise + 3*part, sunrise + 4*part];
+  if (time == "pradosh") return [sunset, sunset + 3*muhurta];
+  if (time == "nishita") return [sunset + 7*muhurta, sunset + 8*muhurta];
+  if (time == "arunodaya") return [sunrise - 2*lastMuhurta, sunrise];
+  return [sunrise, sunrise];
+}
+
+// HINDU_FESTIVAL_DAY -- Civil day a festival is observed on, given the start and end of its tithi
+//                       (null if the tithi misses the window every day)
+
+function hindu_festival_day(start, end, time) {
+  let later = time.endsWith("+"), earlier = time.endsWith("-");
+  if (later || earlier) time = time.slice(0, -1);
+  let first = Math.floor(start - 0.5) + 0.5;
+  if (time == "sunrise") {
+    for (let day = first; day < end; day++) {
+      let sunrise = hindu_sunrise(day);
+      if (sunrise >= start && sunrise < end) return day; // First sunrise in the tithi
     }
-    let diwali = hinduDiwali[hinducal[0]-HINDU_OFFSET];
-    if (diwali == undefined) {
-      hinduDiwali[hinducal[0]-HINDU_OFFSET] = Math.floor(divasa_to_jd(hinducal[0], diwaliDates[2][0], diwaliDates[2][1], false)-0.5)+0.5;
-      diwali = hinduDiwali[hinducal[0]-HINDU_OFFSET];
-    }
-    for (var i = 0; i < 5; i++) {
-      let dayJd = diwali+i-2
-      diwaliDays.push(jd_to_hindu(dayJd+sunTimes_jd(dayJd, 0, true)));
-    }
-    for (var i = 0; i < 5; i++) {
-      if (diwaliDays[i][2] == wrongDiwali[i][1]) {
-        shiftDate = i;
-      }
-    }
-    if (diwaliDays[2][2] == wrongDiwali[0][1]) {
-      diwaliDates[0][1]--;
-      diwaliDates[1][1]--;
-    }
-    if (shiftDate != -1) {
-      for (var i = 0; i < shiftDate; i++) {
-        diwaliDates[i][1]--;
-        if (diwaliDates[i][1] == 0) {
-          diwaliDates[i][0]--;
-          diwaliDates[i][1] = 30;
-        }
-      }
-      for (var i = shiftDate+1; i < 5; i++) {
-        diwaliDates[i][1]++;
-        if (diwaliDates[i][1] == 31) {
-          diwaliDates[i][0]++;
-          diwaliDates[i][1] = 1;
-        }
-      }
-    }
-    if (hinducal[1] == diwaliDates[0][0] && hinducal[2] == diwaliDates[0][1])
-      holidays.push("Dhanteras");
-    if (hinducal[1] == diwaliDates[1][0] && hinducal[2] == diwaliDates[1][1]) {
-      holidays.push("Choti Diwali");
-      holidays.push("Naraka Chaturdashi");
-    }
-    if (hinducal[1] == diwaliDates[2][0] && hinducal[2] == diwaliDates[2][1]) {
-      holidays.push("Diwali");
-      holidays.push("Lakshmi Puja");
-      if (j >= 2378496) holidays.push("Kali Puja");
-    }
-    if (hinducal[1] == diwaliDates[3][0] && hinducal[2] == diwaliDates[3][1])
-      holidays.push("Govardhan Puja");
-    if (hinducal[1] == diwaliDates[4][0] && hinducal[2] == diwaliDates[4][1])
-      holidays.push("Bhai Dooj");
+    return Math.floor(hindu_day_start(start) - 0.5) + 0.5; // Kshaya tithi
   }
-  holidays = holidays.concat(hinduHolidays2(hinducal, j, longPeriods))
+  // The day the tithi covers most of the window, the first one if equal
+  let best = null, bestCover = 0;
+  for (let day = first - 1; day < end && !(earlier && best != null); day++) {
+    let w = hindu_festival_window(day, time);
+    let overlap = Math.min(end, w[1]) - Math.max(start, w[0]);
+    let cover = overlap/(w[1] - w[0]);
+    if (cover > bestCover + 0.001 ||
+        (later && day == best + 1 && overlap >= Math.min(1/30.0, w[1] - w[0]) - 1/86400.0)) {
+      best = day;
+      bestCover = cover;
+    }
+  }
+  return best;
+}
+
+// TITHI_HALF -- End of the first half (karana) of a tithi
+
+function tithi_half(start, end) {
+  let half = tithi_index(start) + 0.5;
+  for (let i = 0; i < 20; i++) {
+    let mid = (start + end)/2.0;
+    if (hindu_tithi(mid) < half) start = mid;
+    else end = mid;
+  }
+  return start;
+}
+
+// NAKSHATRA -- Lunar mansion (0 to 26) at a Julian day for the Hindu calendar's location
+
+function nakshatra(jd) {
+  FORCE_INDIA = document.hinducalendar.india.checked;
+  let n = Math.floor(mod(moonlong(jd) - sunpos(jd)[13], 360.0)/(360.0/27));
   FORCE_INDIA = false;
-  return holidays;
+  return n;
 }
-function hinduHolidayShift(hinducal, j) {
-  var expectedTomorrow = hinducal;
-  if (hinducal[2] == 15) expectedTomorrow[2] = 16;
-  else expectedTomorrow[2] = 1;
-  var dateTomorrow = jd_to_hindu(j+1+sunTimes_jd(j+1, 0, true));
-  if (dateTomorrow[2] != expectedTomorrow[2])
-    return true;
-  return false;
+
+// HOLIKA_DAHAN_DAY -- Purnima in the evening, or the next evening if Purnima lasts
+//                     three prahars into that day
+
+function holika_dahan_day(start, end) {
+  let day = hindu_festival_day(start, end, "pradosh+") ?? hindu_festival_day(start, end, "sunrise");
+  let sunrise = hindu_sunrise(day + 1), sunset = day + 1 + sunTimes_jd(day + 1, 1, true);
+  if (end > sunrise + 0.75*(sunset - sunrise)) day++;
+  return day;
 }
-function hinduHolidays2(hinducal, j, longPeriods=true) {
+
+// RAKSHA_BANDHAN_DAY -- Afternoon of the half of Purnima after bhadra, else the next morning
+//                       if Purnima lasts three muhurtas into it, else the evening bhadra ends
+
+function raksha_bandhan_day(start, end) {
+  let bhadraEnd = tithi_half(start, end);
+  let day = hindu_festival_day(bhadraEnd, end, "aparahna");
+  if (day != null) return day;
+  day = Math.floor(hindu_day_start(bhadraEnd) - 0.5) + 0.5;
+  if (end > hindu_sunrise(day + 1) + 3/30.0) day++;
+  return day;
+}
+
+// DUSSEHRA_DAY -- Dashami in the afternoon, or the next afternoon if Dashami is there at
+//                 sunrise and Shravana nakshatra is in that afternoon instead of the first
+
+function dussehra_day(start, end) {
+  let shravana = function(w) { return nakshatra(w[0]) == 21 || nakshatra(w[1]) == 21; };
+  let day = hindu_festival_day(start, end, "aparahna") ?? hindu_festival_day(start, end, "sunrise");
+  if (hindu_sunrise(day + 1) < end && !shravana(hindu_festival_window(day, "aparahna")) &&
+      shravana(hindu_festival_window(day + 1, "aparahna")))
+    day++;
+  return day;
+}
+
+// THAIPUSAM_DAY -- Purnima day of the solar month of Makara if Pushya nakshatra is in its
+//                  daytime, else the nearest day that it is (or null outside Makara)
+
+function thaipusam_day(jd) {
+  let fullMoon = tithi_near(jd, 14);
+  if (getZodiac(fullMoon) != 10) return null;
+  let day = hindu_festival_day(tithi_boundary(fullMoon, -1), tithi_boundary(fullMoon, 1), "sunrise");
+  let pushya = function(d) {
+    return nakshatra(hindu_sunrise(d)) == 7 || nakshatra(d + sunTimes_jd(d, 1, true)) == 7;
+  };
+  for (let d of [day, day - 1, day + 1, day - 2, day + 2])
+    if (pushya(d)) return d;
+  return day;
+}
+
+// TITHI_HOLIDAYS -- Festivals of a tithi that are observed on a civil day
+
+function tithiHolidays(start, end, day) {
   let holidays = [];
+  let hinducal = jd_to_hindu((start + end)/2.0);
+  if (hinducal[3] == 1) return holidays; // Not in adhik months
   let hinduMon = hinducal[1];
   let hinduDay = hinducal[2];
-  let gregYear = jd_to_gregorian(j)[0];
-  if (hinducal[3] != 1 && j > 1100512) {
-    if (hinduMon == 1 && hinduDay == 1)
-      holidays.push("Hindu New Year");
+  if (POONAM) {
+    hinduDay -= 15;
+    if (hinduDay < 1) {
+      hinduDay += 30;
+      hinduMon--;
+    }
+    if (hinduMon < 1) hinduMon += 12;
+  }
+  let names = [], since = [];
+  if (hinduMon == 1 && hinduDay == 1) {
+    names.push("Hindu New Year");
+    since.push(undefined);
+  }
+  let entry = HOLIDAYS_HINDU[hinduMon + "," + hinduDay];
+  if (entry != undefined) {
+    for (let i = 0; i < entry[0].length; i++) {
+      names.push(entry[0][i]);
+      since.push(entry[1] == undefined ? undefined : entry[1][i]);
+    }
+  }
+  let days = {};
+  for (let i = 0; i < names.length; i++) {
+    if (since[i] != undefined && day < since[i]) continue;
+    let name = names[i], festivalDay;
+    if (name == "Holika Dahan" || name == "Chhoti Holi")
+      festivalDay = holika_dahan_day(start, end);
+    else if (name == "Holi" || name == "Hola Mohalla") {
+      // Days after Holika Dahan, from the Purnima before this tithi
+      let after = (name == "Holi") ? 1 : 2;
+      let purnimaStart = start, purnimaEnd;
+      for (let k = 0; k < after; k++) {
+        purnimaEnd = purnimaStart;
+        purnimaStart = tithi_boundary(purnimaStart - 1/1440.0, -1);
+      }
+      festivalDay = holika_dahan_day(purnimaStart, purnimaEnd) + after;
+    } else if (name == "Raksha Bandhan")
+      festivalDay = raksha_bandhan_day(start, end);
+    else if (name == "Dussehra")
+      festivalDay = dussehra_day(start, end);
+    else {
+      let time = HINDU_FESTIVAL_TIMES[name] || "sunrise";
+      if (days[time] == undefined)
+        days[time] = hindu_festival_day(start, end, time) ?? hindu_festival_day(start, end, "sunrise");
+      festivalDay = days[time];
+    }
+    if (festivalDay == day) holidays.push(name);
+  }
+  return holidays;
+}
+
+// HINDUHOLIDAYS -- Hindu holidays on the civil day containing jd
+
+function hinduHolidays(jd, longPeriods=true) {
+  let holidays = [];
+  let day = Math.floor(jd - 0.5) + 0.5;
+  let gregYear = jd_to_gregorian(day)[0];
+  if (day > 1100512) {
+    // Every tithi observed on this day overlaps it or the night after
+    let start = tithi_boundary(day, -1);
+    while (start < day + 1.5) {
+      let end = tithi_boundary(start, 1);
+      holidays = holidays.concat(tithiHolidays(start, end, day));
+      start = end;
+    }
+    let hinducal = jd_to_hindu(hindu_sunrise(day));
+    let hinduMon = hinducal[1];
+    let hinduDay = hinducal[2];
     if (POONAM) {
       hinduDay -= 15;
       if (hinduDay < 1) {
@@ -254,41 +372,37 @@ function hinduHolidays2(hinducal, j, longPeriods=true) {
       }
       if (hinduMon < 1) hinduMon += 12;
     }
-    if (HOLIDAYS_HINDU[hinduMon + "," + hinduDay] != undefined) {
-      for (var i = 0; i < HOLIDAYS_HINDU[hinduMon + "," + hinduDay][0].length; i++)
-        if (HOLIDAYS_HINDU[hinduMon + "," + hinduDay][1] == undefined ||
-              HOLIDAYS_HINDU[hinduMon + "," + hinduDay][1][i] == undefined ||
-              j >= HOLIDAYS_HINDU[hinduMon + "," + hinduDay][1][i])
-        holidays.push(HOLIDAYS_HINDU[hinduMon + "," + hinduDay][0][i]);
+    let gregMon = jd_to_gregorian(day)[1];
+    if (day > 1976806 && (gregMon == 1 || gregMon == 2) && thaipusam_day(day) == day)
+      holidays.push("Thaipoosam");
+    if (hinducal[3] != 1 && longPeriods) {
+      if (hinduMon == 6 && hinduDay >= 16 && day > 1173245) holidays.push("Pitri Paksha");
+      if (hinduMon == 7 && hinduDay <= 9 && day > 2122900) holidays.push("Navratri");
+      if (day > 1648453 && hinduMon == 6 && hinduDay >= 8 && hinduDay <= 22)
+        holidays.push("Mahalakshmi Vrat");
     }
-    if (hinduMon == 6 && hinduDay >= 16 && longPeriods && j > 1173245) holidays.push("Pitri Paksha");
-    if (hinduMon == 7 && hinduDay <= 9 && longPeriods && j > 2122900) holidays.push("Navratri");
-    if (longPeriods && j > 1648453 && ((hinduMon == 6 && hinduDay >= 8) && (hinduMon == 6 && hinduDay <= 22)))
-      holidays.push("Mahalakshmi Vrat")
-  }
-  if (j > 1100512) {
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 0)) {
+    if (day == sankranti(gregYear, 0)) {
       holidays.push("Mesha Sankranti");
       if (gregYear > 1699) holidays.push("Vaisakhi");
     }
     let makaraS = sankranti(gregYear, 270);
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 30)) holidays.push("Vrishabha Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 60)) holidays.push("Mithuna Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 90)) holidays.push("Karka Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 120)) holidays.push("Singha Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 150)) holidays.push("Kanya Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 180)) holidays.push("Tula Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 210)) holidays.push("Vrishchika Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 240)) holidays.push("Dhanu Sankranti");
-    if (Math.floor(j+0.5)-0.5 == makaraS) {
+    if (day == sankranti(gregYear, 30)) holidays.push("Vrishabha Sankranti");
+    if (day == sankranti(gregYear, 60)) holidays.push("Mithuna Sankranti");
+    if (day == sankranti(gregYear, 90)) holidays.push("Karka Sankranti");
+    if (day == sankranti(gregYear, 120)) holidays.push("Singha Sankranti");
+    if (day == sankranti(gregYear, 150)) holidays.push("Kanya Sankranti");
+    if (day == sankranti(gregYear, 180)) holidays.push("Tula Sankranti");
+    if (day == sankranti(gregYear, 210)) holidays.push("Vrishchika Sankranti");
+    if (day == sankranti(gregYear, 240)) holidays.push("Dhanu Sankranti");
+    if (day == makaraS) {
       holidays.push("Makara Sankranti");
       holidays.push("Maghi");
       holidays.push("Thaipongal");
     }
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 300)) holidays.push("Kumbha Sankranti");
-    if (Math.floor(j+0.5)-0.5 == sankranti(gregYear, 330)) holidays.push("Meena Sankranti");
-    if (Math.floor(j+0.5)-0.5 == makaraS-1) holidays.push("Lohri");
-    else if (Math.floor(j+0.5)-0.5 == sankranti(gregYear+1, 330)-1) holidays.push("Lohri");
+    if (day == sankranti(gregYear, 300)) holidays.push("Kumbha Sankranti");
+    if (day == sankranti(gregYear, 330)) holidays.push("Meena Sankranti");
+    if (day == makaraS-1) holidays.push("Lohri");
+    else if (day == sankranti(gregYear+1, 330)-1) holidays.push("Lohri");
   }
   return holidays;
 }
@@ -1033,8 +1147,8 @@ function jd_to_hindu(jd, forceChaitra=false) {
 
 // JD_TO_PRAHAR -- Determines prahara from Julian day
 function jd_to_prahar(jd) {
-  var sunrise = sunTimes_jd(jd, 0);
-  var sunset = sunTimes_jd(jd, 1);
+  var sunrise = sunTimes_jd(jd, 0, true);
+  var sunset = sunTimes_jd(jd, 1, true);
   if (sunset == sunrise)
     return 0;
   if (sunset < sunrise)
@@ -1043,12 +1157,12 @@ function jd_to_prahar(jd) {
   if (jd < sunrise)
     jd++;
   var dayGap = (sunset - sunrise)/4.0;
-  var nightGap = (sunset+1 - sunrise)/4.0;
+  var nightGap = (sunrise+1 - sunset)/4.0;
   var prahar;
   if (jd < sunset) {
     prahar = (jd - sunrise)/dayGap;
   } else {
-    prahar = (jd - sunset)/dayGap + 4.0;
+    prahar = (jd - sunset)/nightGap + 4.0;
   }
   return Math.floor(prahar);
 }
@@ -1913,9 +2027,7 @@ function updateFromGregorian()
     zodiac = getZodiac(j_real, false);
     document.hinducalendar.zodiac.value = lang3Data.zodiac[zodiac - 1] + " (" + Math.floor(sunpos(j_real)[12]) + "°)";
     document.hinducalendar.ayanamsha.value = Math.round(sunpos(j_real)[15]*1000.0)/1000.0 + "°";
-    holidays = holidays.concat(hinduHolidays(hinducal, j2));
-    dayHolidays = dayHolidays.concat(hinduHolidays(hinducal, j2));
-    dayHolidays = dayHolidays.concat(hinduHolidays(jd_to_hindu(j2-1.0), j2-1.0));
+    holidays = holidays.concat(hinduHolidays(j));
     if (HINDU_OFFSET == 593) {
       if (hinducal[1] == 12)
         document.hinducalendar.ritu.value = lang3Data.seasons[0];
@@ -2154,11 +2266,14 @@ function updateTithi(jd, sunrise)
       dayEnd = tithi_boundary(sunrise, 1);
     }
     let nextSunrise = hindu_sunrise(sunrise + 1);
+    let vriddhi = lang3Data.vriddhi;
+    if (tithi_index(sunrise) != index) // Name the day's tithi if it isn't the one shown
+      vriddhi += ": " + hinduDayName(tithi_index(sunrise) + 1, false);
     let notes = [];
     if (dayStart < hindu_sunrise(sunrise - 1))
-      notes.push(lang3Data.vriddhi + " 2/2");
+      notes.push(vriddhi + " 2/2");
     else if (dayEnd > nextSunrise)
-      notes.push(lang3Data.vriddhi + " 1/2");
+      notes.push(vriddhi + " 1/2");
     if (dayEnd < nextSunrise && tithi_boundary(dayEnd, 1) < nextSunrise)
       notes.push(lang3Data.kshaya + ": " + hinduDayName(tithi_index(dayEnd) + 1, false));
     document.hinducalendar.tithiNote.value = notes.join(", ");
