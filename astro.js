@@ -392,7 +392,9 @@ function ecliptoeq(jd, Lambda, Beta)
                 Dynamical time and Universal time.  */
 
 /*  Table of observed Delta T values at the beginning of
-    even numbered years from 1620 through 2002.  */
+    even numbered years from 1620 through 2026. Values from 2000
+    are computed from the IERS EOP 20 C04 series as
+    32.184 + (TAI - UTC) - (UT1 - UTC).  */
 
 var deltaTtab = new Array(
     121, 112, 103, 95, 88, 82, 77, 72, 68, 63, 60, 56, 53, 51, 48, 46,
@@ -408,27 +410,63 @@ var deltaTtab = new Array(
     18.2, 20.2, 21.1, 22.4, 23.5, 23.8, 24.3, 24, 23.9, 23.9, 23.7,
     24, 24.3, 25.3, 26.2, 27.3, 28.2, 29.1, 30, 30.7, 31.4, 32.2,
     33.1, 34, 35, 36.5, 38.3, 40.2, 42.2, 44.5, 46.5, 48.5, 50.5,
-    52.2, 53.8, 54.9, 55.8, 56.9, 58.3, 60, 61.6, 63, 65, 66.6
+    52.2, 53.8, 54.9, 55.8, 56.9, 58.3, 60, 61.6, 63, 63.83, 64.30,
+    64.57, 64.85, 65.46, 66.07, 66.60, 67.28, 68.10, 68.97, 69.36,
+    69.29, 69.18, 69.11
                          );
+
+/*  DELTATPOLYNOMIAL  --  Delta T from the historical record by
+                          Espenak and Meeus (2006), based on Morrison
+                          and Stephenson (2004), for years before 1600,
+                          and from 2150.  */
+
+function deltatPolynomial(year)
+{
+    var u;
+    if ((year < -500) || (year >= 2150)) {
+        u = (year - 1820) / 100;
+        return -20 + (32 * u * u);
+    }
+    if (year < 500) {
+        u = year / 100;
+        return 10583.6 - (1014.41 * u) + (33.78311 * Math.pow(u, 2)) - (5.952053 * Math.pow(u, 3)) -
+            (0.1798452 * Math.pow(u, 4)) + (0.022174192 * Math.pow(u, 5)) + (0.0090316521 * Math.pow(u, 6));
+    }
+    u = (year - 1000) / 100;
+    return 1574.2 - (556.01 * u) + (71.23472 * Math.pow(u, 2)) + (0.319781 * Math.pow(u, 3)) -
+        (0.8503463 * Math.pow(u, 4)) - (0.005050998 * Math.pow(u, 5)) + (0.0083572073 * Math.pow(u, 6));
+}
+
+/*  DELTATPREDICTION  --  Delta T predicted by Espenak and Meeus (2006)
+                          for years from 2005 through 2150.  */
+
+function deltatPrediction(year)
+{
+    var t = year - 2000;
+    if (year < 2050)
+        return 62.92 + (0.32217 * t) + (0.005589 * t * t);
+    return -20 + (32 * Math.pow((year - 1820) / 100, 2)) - (0.5628 * (2150 - year));
+}
 
 function deltat(year)
 {
     var dt, f, i, t;
+    var lastYear = 1620 + (2 * (deltaTtab.length - 1)),
+        lastDt = deltaTtab[deltaTtab.length - 1];
 
-    if ((year >= 1620) && (year <= 2000)) {
+    if ((year >= 1620) && (year < lastYear)) {
         i = Math.floor((year - 1620) / 2);
         f = ((year - 1620) / 2) - i;  /* Fractional part of year */
         dt = deltaTtab[i] + ((deltaTtab[i + 1] - deltaTtab[i]) * f);
+    } else if ((year >= lastYear) && (year < 2150)) {
+        /* Continue from the last observed value, fading into the prediction by 2150 */
+        dt = deltatPrediction(year) + ((lastDt - deltatPrediction(lastYear)) *
+            (2150 - year) / (2150 - lastYear));
+    } else if ((year >= 1600) && (year < 1620)) {
+        /* Join the polynomial for 1600 to the start of the table */
+        dt = deltatPolynomial(1600) + ((deltaTtab[0] - deltatPolynomial(1600)) * (year - 1600) / 20);
     } else {
-        t = (year - 2000) / 100;
-        if (year < 948) {
-            dt = 2177 + (497 * t) + (44.1 * t * t);
-        } else {
-            dt = 102 + (102 * t) + (25.3 * t * t);
-            if ((year > 2000) && (year < 2100)) {
-                dt += 0.37 * (year - 2100);
-            }
-        }
+        dt = deltatPolynomial(year);
     }
     return dt;
 }
@@ -758,61 +796,224 @@ function getAnomaly(degree, num) {
   }
   return (anomaly1+anomaly2)/2.0;
 }
+/* Periodic terms for the longitude (sigma l) and distance (sigma r) of the
+   Moon as given in table 47.A of Meeus, "Astronomical Algorithms", second
+   edition. Each row is: multiples of D, M, M', F, then sigma l, sigma r. */
+
+var moonLongDistTerms = new Array(
+    0,  0,  1,  0,  6288774, -20905355,
+    2,  0, -1,  0,  1274027,  -3699111,
+    2,  0,  0,  0,   658314,  -2955968,
+    0,  0,  2,  0,   213618,   -569925,
+    0,  1,  0,  0,  -185116,     48888,
+    0,  0,  0,  2,  -114332,     -3149,
+    2,  0, -2,  0,    58793,    246158,
+    2, -1, -1,  0,    57066,   -152138,
+    2,  0,  1,  0,    53322,   -170733,
+    2, -1,  0,  0,    45758,   -204586,
+    0,  1, -1,  0,   -40923,   -129620,
+    1,  0,  0,  0,   -34720,    108743,
+    0,  1,  1,  0,   -30383,    104755,
+    2,  0,  0, -2,    15327,     10321,
+    0,  0,  1,  2,   -12528,         0,
+    0,  0,  1, -2,    10980,     79661,
+    4,  0, -1,  0,    10675,    -34782,
+    0,  0,  3,  0,    10034,    -23210,
+    4,  0, -2,  0,     8548,    -21636,
+    2,  1, -1,  0,    -7888,     24208,
+    2,  1,  0,  0,    -6766,     30824,
+    1,  0, -1,  0,    -5163,     -8379,
+    1,  1,  0,  0,     4987,    -16675,
+    2, -1,  1,  0,     4036,    -12831,
+    2,  0,  2,  0,     3994,    -10445,
+    4,  0,  0,  0,     3861,    -11650,
+    2,  0, -3,  0,     3665,     14403,
+    0,  1, -2,  0,    -2689,     -7003,
+    2,  0, -1,  2,    -2602,         0,
+    2, -1, -2,  0,     2390,     10056,
+    1,  0,  1,  0,    -2348,      6322,
+    2, -2,  0,  0,     2236,     -9884,
+    0,  1,  2,  0,    -2120,      5751,
+    0,  2,  0,  0,    -2069,         0,
+    2, -2, -1,  0,     2048,     -4950,
+    2,  0,  1, -2,    -1773,      4130,
+    2,  0,  0,  2,    -1595,         0,
+    4, -1, -1,  0,     1215,     -3958,
+    0,  0,  2,  2,    -1110,         0,
+    3,  0, -1,  0,     -892,      3258,
+    2,  1,  1,  0,     -810,      2616,
+    4, -1, -2,  0,      759,     -1897,
+    0,  2, -1,  0,     -713,     -2117,
+    2,  2, -1,  0,     -700,      2354,
+    2,  1, -2,  0,      691,         0,
+    2, -1,  0, -2,      596,         0,
+    4,  0,  1,  0,      549,     -1423,
+    0,  0,  4,  0,      537,     -1117,
+    4, -1,  0,  0,      520,     -1571,
+    1,  0, -2,  0,     -487,     -1739,
+    2,  1,  0, -2,     -399,         0,
+    0,  0,  2, -2,     -381,     -4421,
+    1,  1,  1,  0,      351,         0,
+    3,  0, -2,  0,     -340,         0,
+    4,  0, -3,  0,      330,         0,
+    2, -1,  2,  0,      327,         0,
+    0,  2,  1,  0,     -323,      1165,
+    1,  1, -1,  0,      299,         0,
+    2,  0,  3,  0,      294,         0,
+    2,  0, -1, -2,        0,      8752
+);
+
+/* Periodic terms for the latitude (sigma b) of the Moon as given in table
+   47.B of Meeus. Each row is: multiples of D, M, M', F, then sigma b. */
+
+var moonLatTerms = new Array(
+    0,  0,  0,  1,  5128122,
+    0,  0,  1,  1,   280602,
+    0,  0,  1, -1,   277693,
+    2,  0,  0, -1,   173237,
+    2,  0, -1,  1,    55413,
+    2,  0, -1, -1,    46271,
+    2,  0,  0,  1,    32573,
+    0,  0,  2,  1,    17198,
+    2,  0,  1, -1,     9266,
+    0,  0,  2, -1,     8822,
+    2, -1,  0, -1,     8216,
+    2,  0, -2, -1,     4324,
+    2,  0,  1,  1,     4200,
+    2,  1,  0, -1,    -3359,
+    2, -1, -1,  1,     2463,
+    2, -1,  0,  1,     2211,
+    2, -1, -1, -1,     2065,
+    0,  1, -1, -1,    -1870,
+    4,  0, -1, -1,     1828,
+    0,  1,  0,  1,    -1794,
+    0,  0,  0,  3,    -1749,
+    0,  1, -1,  1,    -1565,
+    1,  0,  0,  1,    -1491,
+    0,  1,  1,  1,    -1475,
+    0,  1,  1, -1,    -1410,
+    0,  1,  0, -1,    -1344,
+    1,  0,  0, -1,    -1335,
+    0,  0,  3,  1,     1107,
+    4,  0,  0, -1,     1021,
+    4,  0, -1,  1,      833,
+    0,  0,  1, -3,      777,
+    4,  0, -2,  1,      671,
+    2,  0,  0, -3,      607,
+    2,  0,  2, -1,      596,
+    2, -1,  1, -1,      491,
+    2,  0, -2,  1,     -451,
+    0,  0,  3, -1,      439,
+    2,  0,  2,  1,      422,
+    2,  0, -3, -1,      421,
+    2,  1, -1,  1,     -366,
+    2,  1,  0,  1,     -351,
+    4,  0,  0,  1,      331,
+    2, -1,  1,  1,      315,
+    2, -2,  0, -1,      302,
+    0,  0,  1,  3,     -283,
+    2,  1,  1, -1,     -229,
+    1,  1,  0, -1,      223,
+    1,  1,  0,  1,      223,
+    0,  1, -2, -1,     -220,
+    2,  1, -1, -1,     -220,
+    1,  0,  1,  1,     -185,
+    2, -1, -2, -1,      181,
+    0,  1,  2,  1,     -177,
+    4,  0, -2, -1,      176,
+    4, -1, -1, -1,      166,
+    1,  0,  1, -1,     -164,
+    4,  0,  1, -1,      132,
+    1,  0, -1, -1,     -119,
+    4, -1,  0, -1,      115,
+    2, -2,  0,  1,      107
+);
+
+/*  MOONARGS  --  Arguments of the Moon from Meeus, chapter 47, at a
+                  local Julian day: T (centuries of dynamical time since
+                  J2000), mean longitude, mean elongation, the Sun's mean
+                  anomaly, the Moon's mean anomaly, argument of latitude,
+                  and the eccentricity factor E.  */
+
+function moonargs(jd_local)
+{
+    var T = ((jd_local - J2000) + deltat(2000 + (jd_local - J2000)/365.25)/86400.0) / JulianCentury;
+    return new Array(
+        T,
+        218.3164477 + 481267.88123423*T - 0.0015786*T*T + T*T*T/538841.0 - T*T*T*T/65194000.0,
+        fixangle(297.8501921 + 445267.1114034*T - 0.0018819*T*T + T*T*T/545868.0 - T*T*T*T/113065000.0),
+        fixangle(357.5291092 + 35999.0502909*T - 0.0001536*T*T + T*T*T/24490000.0),
+        fixangle(134.9633964 + 477198.8675055*T + 0.0087414*T*T + T*T*T/69699.0 - T*T*T*T/14712000.0),
+        fixangle(93.2720950 + 483202.0175233*T - 0.0036539*T*T - T*T*T/3526000.0 + T*T*T*T/863310000.0),
+        1 - 0.002516*T - 0.0000074*T*T
+    );
+}
+
+/*  MOONLONGTERMS  --  Sum of the periodic terms for the Moon's longitude,
+                       in millionths of a degree, from moonargs.  */
+
+function moonlongterms(args)
+{
+    var T = args[0], L = args[1], D = args[2], M = args[3], Mp = args[4], F = args[5], E = args[6];
+    var ePowers = [1, E, E*E], sum = 0;
+    for (var i = 0; i < moonLongDistTerms.length; i += 6) {
+        sum += moonLongDistTerms[i+4] * ePowers[Math.abs(moonLongDistTerms[i+1])] *
+            dsin(moonLongDistTerms[i]*D + moonLongDistTerms[i+1]*M + moonLongDistTerms[i+2]*Mp + moonLongDistTerms[i+3]*F);
+    }
+    // Additive terms for Venus, Jupiter, and the flattening of the Earth
+    return sum + 3958*dsin(119.75 + 131.849*T) + 1962*dsin(L - F) + 318*dsin(53.09 + 479264.290*T);
+}
+
+/*  MOONLONG  --  Apparent longitude of the Moon. Much faster than moonpos
+                  when only the longitude is needed. Nutation is
+                  approximated the same way as in sunpos, so it cancels
+                  in the difference between the two.  */
+
+function moonlong(jd, timezone=null)
+{
+    var jd_local = (timezone == null) ? jd - timeZone(1, jd) : jd - timezone/24.0;
+    var args = moonargs(jd_local);
+    var Omega = 125.04 - (1934.136 * args[0]);
+    return fixangle(args[1] + moonlongterms(args)/1000000.0 - 0.00478*dsin(Omega));
+}
+
 function moonpos(jd, timezone=null) {
   var t, sunCalc, Ls, Ms, aL, aM, aF, D, L, q, eLat,
     T, a1, a2, a3, a4, a5, elongation, epsilon,
     q1, q2, q3, q4, q5, meanAnomaly, F, latitude,
     Dec, RA, P, deltaPsi, obliquity, hourAngle,
-    ra, dec, aL, E, M;
+    ra, dec, aL, E, M, args;
   if (timezone == null) jd_local = jd - timeZone(1, jd);
   else jd_local = jd - (timezone/24.0);
-  t = (jd_local - J2000);
-  T = t/36525.0;
+  args = moonargs(jd_local);
+  T = args[0];
+  L = args[1];
+  elongation = args[2];
+  M = args[3];
+  meanAnomaly = args[4];
+  F = args[5];
+  E = args[6];
   sunCalc = sunpos(jd);
-  Ls = sunCalc[4];
-  Ms = sunCalc[1];
-  //aL = modPos(218.3164477 + 13.1764*t);
-  aL = 218.3164477 + 481267.88123423*T
-    - 0.0015786*T*T + T*T*T/538841.0 - T*T*T*T/65194000.0;
-  aM = fixangle(13.0650*t + 134.916);
-  aF = fixangle(13.2294*t + 93.284);
-  /*D = aL - Ls;
-  a1 = Math.round(modPos(aM));
-  a2 = Math.round(modPos(2*D - aM));
-  a3 = Math.round(modPos(D));
-  a4 = Math.round(modPos(Ms));
-  a5 = Math.round(modPos(2 * aF));
-  q1 = getAnomaly(a1, 0);
-  q2 = getAnomaly(a2, 1);
-  q3 = getAnomaly(a3, 2);
-  q4 = getAnomaly(a4, 3);
-  q5 = getAnomaly(a5, 4);
-  L = aL + q1+q2+q3+q4+q5; */
-  L = aL;
-
   deltaPsi = nutation(jd_local)[0];
-  elongation = fixangle(297.8501921 + 445267.1114034*T - 0.0018819*T*T +
-      T*T*T/545868.0 - T*T*T*T/113065000.0);
-  meanAnomaly = fixangle(134.9633964 + 477198.8675055*T + 0.0087414*T*T +
-    T*T*T/69699.0 - T*T*T*T/14712000.0);
-  F = fixangle(93.2720950 + 483202.0175233*T - 0.0036539*T*T - T*T*T/3526000.0
-    + T*T*T*T/863310000.0);
-  E = fixangle(1 - 0.002516*T - 0.0000074*T*T);
-  M = fixangle(357.5291092 + 3599.0502909*T - 0.0001536*T*T +
-    T*T*T/24490000.0);
   var d = elongation;
   var mp = meanAnomaly;
-  var sumL = 6288774*dsin(mp) + 1274027*dsin(2*d - mp) + 658314*dsin(2*d) +
-    213618*dsin(2*mp) - 185116*E*dsin(M) - 114332*dsin(2*F) + 58793*dsin(2*d - 2*mp) +
-    57066*E*dsin(2*d - M - mp) + 53322*dsin(2*d + mp) + 45758*E*dsin(2*d - 2*M)
-    - 40923*E*dsin(M - mp) - 34720*dsin(d) - 30383*E*dsin(M + mp) + 15327*dsin(2*d - 2*F);
+  var sumL = moonlongterms(args), sumR = 0, sumB = 0, arg;
+  var ePowers = [1, E, E*E]; // Terms with M are scaled by E for each multiple of M
+  for (var i = 0; i < moonLongDistTerms.length; i += 6) {
+    arg = moonLongDistTerms[i]*d + moonLongDistTerms[i+1]*M + moonLongDistTerms[i+2]*mp + moonLongDistTerms[i+3]*F;
+    sumR += moonLongDistTerms[i+5]*ePowers[Math.abs(moonLongDistTerms[i+1])]*dcos(arg);
+  }
+  for (var i = 0; i < moonLatTerms.length; i += 5) {
+    arg = moonLatTerms[i]*d + moonLatTerms[i+1]*M + moonLatTerms[i+2]*mp + moonLatTerms[i+3]*F;
+    sumB += moonLatTerms[i+4]*ePowers[Math.abs(moonLatTerms[i+1])]*dsin(arg);
+  }
+  // Additive terms for Venus, Jupiter, and the flattening of the Earth
+  var A1 = 119.75 + 131.849*T, A3 = 313.45 + 481266.484*T;
+  sumB += -2235*dsin(L) + 382*dsin(A3) + 175*dsin(A1 - F) + 175*dsin(A1 + F) +
+    127*dsin(L - mp) - 115*dsin(L + mp);
+  latitude = sumB;
   L += sumL/1000000.0;
   aL = L + deltaPsi;
-  latitude = 5128122*dsin(F) + 280602*dsin(meanAnomaly + F) + 277693*dsin(meanAnomaly - F) + 173237*dsin(2*elongation*F) +
-    55413*dsin(2*elongation - meanAnomaly + F) + 46271*dsin(2*elongation - meanAnomaly - F) + 32573*dsin(2*elongation + F) +
-    17198*dsin(2*meanAnomaly + F) + 9266*dsin(2*elongation + meanAnomaly - F) + 8822*dsin(2*meanAnomaly - F) +
-    4324*dsin(2*elongation - 2*meanAnomaly - F) + 4200*dsin(2*elongation + meanAnomaly + F);
-  latitude -= 2235 * dsin(L);
   latitude = fixangle(latitude/1000000.0);
   if (latitude > 180.0) latitude -= 360.0;
   let pos = ecliptoeq(jd_local, aL, latitude);
@@ -830,19 +1031,7 @@ function moonpos(jd, timezone=null) {
     0.000387933*T*T - T*T*T/38710000 + deltaPsi*dcos(obliquity)) + getLongitude() - ra;
   eLat = getLatitude();
   q = rtd(Math.atan2(dsin(hourAngle), dtan(eLat)*dcos(dec) - dsin(dec)*dcos(hourAngle)));
-  D = 385000560.0;
-  D -= 20905355*dcos(meanAnomaly) + 3699111*dcos(2*elongation - meanAnomaly) + 2955968*dcos(2*elongation)
-    + 569925*dcos(2*meanAnomaly) + 48888*E*dcos(sunCalc[1]) + 3149*dcos(2*F) - 246158*dcos(2*elongation-2*meanAnomaly)
-    + 152138*E*dcos(2*elongation - sunCalc[1] - meanAnomaly) + 170733*dcos(2*elongation + meanAnomaly) +
-    204586*E*dcos(2*elongation - sunCalc[1]) + 129620*E*dcos(sunCalc[1] - meanAnomaly) - 108743*dcos(elongation)
-    - 104755*E*dcos(sunCalc[1] + meanAnomaly) - 10321*dcos(2*elongation - 2*F) - 79661*dcos(2*meanAnomaly - 2*F)
-    + 34782*dcos(4*elongation - meanAnomaly) + 23210*dcos(3*meanAnomaly) + 21636*dcos(4*elongation - 2*meanAnomaly)
-    - 30824*E*dcos(2*elongation + sunCalc[1]) + 8379*dcos(2*elongation - meanAnomaly) + 16675*E*dcos(elongation + sunCalc[1])
-    + 12831*E*dcos(2*elongation - sunCalc[1] + meanAnomaly) + 10445*dcos(2*elongation + 2*meanAnomaly)
-    + 11650*dcos(4*elongation) -14403*dcos(2*elongation - 3*meanAnomaly) + 7003*E*dcos(sunCalc[1] - 2*meanAnomaly)
-    - 10056*E*dcos(2*elongation - sunCalc[1] - 2*meanAnomaly) - 6322*dcos(elongation + meanAnomaly)
-    + 9884*E*E*dcos(2*elongation - 2*sunCalc[1]) - 5751*E*dcos(sunCalc[1] + 2*meanAnomaly) +
-    4950*E*E*dcos(2*elongation - 2*sunCalc[1] - meanAnomaly) - 4130*dcos(2*elongation + meanAnomaly - 2*F);
+  D = 385000560.0 + sumR; // Meters
   return new Array(fixangle(aL),            // [0] Apparent longitude of the moon
                   fixangle(L),              // [1] Mean longitude of the moon
                   elongation,             // [2] Mean elongation of the moon

@@ -988,7 +988,7 @@ var POONAM = false;
 // TITHI -- Determines Tithi (lunar day) for Hindu calendar from Julian day (also used for calculating moon phases)
 
 function tithi(jd, earlier=false) {
-  let tithi = (moonpos(jd)[0] - sunpos(jd)[7])/12.0;
+  let tithi = (moonlong(jd) - sunpos(jd)[7])/12.0;
   tithi = mod(tithi, 30.0);
   return tithi;
 }
